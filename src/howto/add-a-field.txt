@@ -1,0 +1,24 @@
+Add a Field to the Database 
+
+Last Updated: 2007/02/26 Reid
+
+Current:
+
+1) create the constant here
+2) add to masterfood.java & hbm
+3) add to statistical table key finder factory
+
+
+Legacy:
+
+/*
+ * 2006-07-26 to add a new field
+ * 
+ * 1) create the constant here
+ * 2) add to fieldstodisplaybean java & hbm
+ * 3) add to masterfoodfilterparamsters IF & IMPL
+ * 4) add to masterfoodfilterparameterswrapper IF & IMPL
+ * 5) add to masterfood.java & hbm
+ * 6) add to statistical table key finder factory
+ * 
+ */

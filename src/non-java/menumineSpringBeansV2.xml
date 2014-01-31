@@ -1,0 +1,1582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN/EN" "http://www.springframework.org/dtd/spring-beans.dtd" >
+ 
+<beans>
+
+	<bean id="propertyConfigurer" 
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+	  	  <value>classpath:spring.properties</value>
+		</property>
+	</bean>
+
+	<bean id="adminDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName">
+			<value>${admin.database.driver}</value>
+		</property>
+		<property name="url">
+			<value>${admin.database.url}</value>
+		</property>
+		<property name="username">
+			<value>${admin.database.username}</value>
+		</property>
+		<property name="password">
+			<value>${admin.database.password}</value>
+		</property>
+	</bean> 
+
+	<bean id="adminSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="mappingResources">
+			<list>
+				<value>com/fstx/stdlib2/authen/loginhistory.hbm.xml</value>
+				<value>com/fstx/stdlib2/authen/users/user.hbm.xml</value>
+				<value>com/fsrin/menumine/users/userpreference.hbm.xml</value>
+				<value>com/fstx/stdlib2/authen/users/usergroup.hbm.xml</value>
+				<value>com/fstx/stdlib2/authen/users/groupright.hbm.xml</value>
+				<value>com/fstx/stdlib2/authen/users/groupmembership.hbm.xml</value>
+				<value>com/fsrin/menumine/common/filterparameter.hbm.xml</value>
+				<value>com/fsrin/menumine/core/menumine/chain/chainfilterparameters.hbm.xml</value>
+				<value>com/fsrin/menumine/core/menumine/savedquery/savedquery.hbm.xml</value>				
+				<value>com/fsrin/menumine/core/menumine/fieldstodisplaybean.hbm.xml</value>				
+				<value>com/fsrin/menumine/core/menumine/masterfoodfilterparameters.hbm.xml</value>
+
+				<value>com/fsrin/menumine/core/menumine/rollup/RollUpElement.hbm.xml</value>
+				<value>com/fsrin/menumine/core/menumine/rollup/RollUpOptions.hbm.xml</value>
+				<value>com/fsrin/menumine/core/menumine/tblchain.hbm.xml</value>
+
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>	
+				<prop key="hibernate.show_sql">${admin.database.showsql}</prop>
+				<prop key="hibernate.c3p0.max_size">10</prop>
+				<prop key="hibernate.c3p0.min_size">5</prop>
+				<prop key="hibernate.c3p0.timeout">600</prop>
+				<prop key="hibernate.c3p0.max_statements">100</prop>
+				<prop key="hibernate.c3p0.idle_test_period">300</prop>
+				<prop key="hibernate.c3p0.acquire_increment">2</prop>
+           </props>
+		</property>
+		<property name="dataSource">
+			<ref bean="adminDataSource"/>
+		</property>
+	</bean>
+
+	<bean id="dataDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName">
+			<value>${data.database.driver}</value>
+		</property>
+		<property name="url">
+			<value>${data.database.url}</value>
+		</property>
+		<property name="username">
+			<value>${data.database.username}</value>
+		</property>
+		<property name="password">
+			<value>${data.database.password}</value>
+		</property>
+	</bean> 	
+
+	<bean id="dataSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="mappingResources">
+			<list>
+				<value>com/fsrin/menumine/core/menumine/tblchain.hbm.xml</value>
+				<value>com/fsrin/menumine/core/menumine/tblmasterfood.hbm.xml</value>
+				<value>com/fsrin/menumine/core/chainstat/tblchainstat.hbm.xml</value>
+				<value>com/fsrin/menumine/core/chainmap/ChainStateCount.hbm.xml</value>				
+			</list>
+		</property>
+		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>	
+				<prop key="hibernate.show_sql">${data.database.showsql}</prop>
+				<prop key="hibernate.c3p0.max_size">10</prop>
+				<prop key="hibernate.c3p0.min_size">5</prop>
+				<prop key="hibernate.c3p0.timeout">600</prop>
+				<prop key="hibernate.c3p0.max_statements">100</prop>
+				<prop key="hibernate.c3p0.idle_test_period">300</prop>
+				<prop key="hibernate.c3p0.acquire_increment">2</prop>				
+           </props>
+		</property>
+		
+		<property name="dataSource">
+			<ref bean="dataDataSource"/>
+		</property>
+	</bean>
+		
+	<bean id="menuMineSessionContextAwareAction" 
+		class="com.fsrin.menumine.context.webwork.MenuMineSessionContextAwareAction" 
+		singleton="false"  />
+	
+	
+	<!--ABSTRACT -->
+	<bean id="displayAction" abstract="true" 
+		class="com.fsrin.menumine.core.menumine.webwork.AbstractMenuMineDisplayAction" singleton="false">
+		<property name="chainServiceDelegate">
+			<ref bean="chainServiceDelegate" />
+		</property>
+		<property name="rollUpServiceDelegate">
+			<ref bean="rollUpServiceDelegate" />
+		</property>
+		<!-- 2006-02-06 RSC
+		<property name="completedQueryManager">
+			<ref bean="completedQueryManager" />
+		</property>
+		-->
+	</bean>
+	
+	<!-- 2006-02-06 RSC
+	<bean id="completedQueryManager" 
+		class="com.fsrin.menumine.core.menumine.savedquery.CompletedQueryManagerImpl" 
+		singleton="true"  >
+	</bean>
+	-->
+	
+	
+	
+	
+	<!-- STDLIB2 -->
+	
+	<!--USE to turn on the c3p0 Connection Pool.
+	<prop key="hibernate.c3p0.min_size">5</prop>
+				<prop key="hibernate.c3p0.max_size">20</prop>
+				<prop key="hibernate.c3p0.timeout">120</prop>
+				<prop key="hibernate.c3p0.max_statements">50</prop>
+	-->
+
+	<bean id="userLiveDao" class="com.fstx.stdlib2.authen.users.UserDao" singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="userGroupLiveDao" class="com.fstx.stdlib2.authen.users.UserGroupDao" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>
+
+	
+
+	<bean id="groupMembershipLiveDao" class="com.fstx.stdlib2.authen.users.GroupMembershipDao" singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>
+
+	
+	<bean id="groupRightLiveDao" class="com.fstx.stdlib2.authen.users.GroupRightDao" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="groupRightServiceDelegate" class="com.fstx.stdlib2.authen.users.GroupRightServiceDelegateImpl" singleton="false"  >
+		<property name="groupRightDao" >
+			<ref bean="groupRightLiveDao" />
+		</property>	
+	</bean>
+	
+	
+
+	<bean id="userServiceDelegate" class="com.fstx.stdlib2.authen.users.UserServiceDelegateImpl" singleton="false" >
+		<property name="userDao" >
+			<ref bean="userLiveDao" />
+		</property>	
+	</bean>
+	
+	<bean id="userGroupServiceDelegate" class="com.fstx.stdlib2.authen.users.UserGroupServiceDelegateImpl" singleton="false" >
+		<property name="userGroupDao" >
+			<ref bean="userGroupLiveDao" />
+		</property>
+	<property name="groupMembershipDao" >
+			<ref bean="groupMembershipLiveDao" />
+		</property>	
+	</bean>
+
+	<bean id="stdlib2Authenticator" class="com.fstx.stdlib2.authen.AuthenticatorImpl" >
+	</bean>
+
+	<bean id="stdlib2Authorizer" class="com.fstx.stdlib2.author.AuthorizerImpl" >
+	</bean>
+
+	
+
+	
+	<!-- WEB LOGIN -->
+	<bean id="webLoginAction" 
+		class="com.fsrin.menumine.common.webwork.WebLoginAction" 
+		singleton="false" />
+
+	
+	<bean id="dashboard" class="com.fsrin.menumine.dashboard.webwork.ViewDevelopmentDashboardAction" singleton="false">
+		<property name="savedQueryManager" >
+			<ref bean="savedQueryManager" />
+		</property>
+		<!-- 2006-01-31 Reid Doesn't do anything
+		<property name="foodServiceNewsRssFeedManager">
+	    	<ref bean="foodServiceNewsRssFeedManager"/>
+	    </property>
+	    -->
+		
+	</bean>
+	
+
+	
+	
+	<bean id="flareProviderAction" class="com.fsrin.menumine.core.flare.xwork.FlareProviderAction" singleton="false">
+		<property name="flareImageService" >
+			<ref bean="flareImageService" />
+		</property>
+	
+	</bean>
+	
+	
+	<bean id="flareImageService" 
+		class="com.fsrin.menumine.core.flare.FlareImageService" 
+		singleton="true" />
+
+	 
+	
+	<bean id="wwLogoutAction" 
+		class="com.fsrin.menumine.common.webwork.LogoutAction" 
+		singleton="false" />
+
+	
+	
+	
+	<!-- USER and GROUP WEBWORK -->
+	<bean id="wwUserList" class="com.fstx.stdlib2.authen.webwork.UserListAction" singleton="false">
+		<property name="userServiceDelegate">
+			<ref bean="userServiceDelegate" />
+		</property>
+	</bean>
+
+	<bean id="wwUserModify" class="com.fstx.stdlib2.authen.webwork.UserModifyAction" singleton="false">
+		<property name="userServiceDelegate">
+			<ref bean="userServiceDelegate" />
+		</property>
+		<property name="userDeleteCommand">
+			<ref bean="userDeleteCommand" />
+		</property>
+	</bean>
+	
+	<bean id="wwUserModifyFromList" class="com.fstx.stdlib2.authen.webwork.UserModifyFromListAction" singleton="false">
+		<property name="userServiceDelegate">
+			<ref bean="userServiceDelegate" />
+		</property>
+		<property name="userDeleteCommand">
+			<ref bean="userDeleteCommand" />
+		</property>
+	</bean>
+	
+	
+	<bean id="wwUserModifyPassword" class="com.fstx.stdlib2.authen.webwork.UserModifyPasswordAction" singleton="false">
+		<property name="userServiceDelegate">
+			<ref bean="userServiceDelegate" />
+		</property>
+
+	</bean>
+	
+
+	<bean id="userDeleteCommand" class="com.fstx.stdlib2.authen.webwork.UserDeleteCommand" singleton="false">
+		<property name="userServiceDelegate">
+			<ref bean="userServiceDelegate" />
+		</property>
+		<property name="transactionManager">
+			<ref bean="myTransactionManager" />
+		</property>
+		
+		
+	</bean>
+
+	<bean id="wwUserGroupModify" class="com.fstx.stdlib2.authen.webwork.UserGroupModifyAction" singleton="false">
+		<property name="userGroupServiceDelegate">
+			<ref bean="userGroupServiceDelegate" />
+		</property>
+		<property name="userGroupDeleteCommand">
+			<ref bean="userGroupDeleteCommand" />
+		</property>
+	</bean>
+		<bean id="userGroupDeleteCommand" class="com.fstx.stdlib2.authen.webwork.UserGroupDeleteCommand" singleton="false">
+		<property name="userGroupServiceDelegate">
+			<ref bean="userGroupServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="wwUserGroupMembership" class="com.fstx.stdlib2.authen.webwork.UserGroupMembershipAction" singleton="false">
+		<property name="userGroupServiceDelegate">
+			<ref bean="userGroupServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="wwAddToGroup" class="com.fstx.stdlib2.authen.webwork.AddToGroupAction" singleton="false">
+		<property name="userServiceDelegate">
+			<ref bean="userServiceDelegate" />
+		</property>
+		<property name="userGroupServiceDelegate">
+			<ref bean="userGroupServiceDelegate" />
+		</property>
+
+	</bean>
+	
+	<bean id="wwRemoveFromGroup" class="com.fstx.stdlib2.authen.webwork.RemoveFromGroupAction" singleton="false">
+		<property name="userServiceDelegate">
+			<ref bean="userServiceDelegate" />
+		</property>
+		<property name="userGroupServiceDelegate">
+			<ref bean="userGroupServiceDelegate" />
+		</property>
+	</bean>
+	
+
+	<bean id="wwUserGroupRights" class="com.fstx.stdlib2.authen.webwork.UserGroupRightsAction" singleton="false">
+		<property name="userGroupServiceDelegate">
+			<ref bean="userGroupServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="wwAddRightToGroup" class="com.fstx.stdlib2.authen.webwork.AddRightToGroupAction" singleton="false">
+		<property name="groupRightServiceDelegate">
+			<ref bean="groupRightServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="wwRemoveRightFromGroup" class="com.fstx.stdlib2.authen.webwork.RemoveRightFromGroupAction" singleton="false">
+		<property name="groupRightServiceDelegate">
+			<ref bean="groupRightServiceDelegate" />
+		</property>
+	</bean>
+		
+	<bean id="wwUserGroupList" class="com.fstx.stdlib2.authen.webwork.UserGroupListAction" singleton="false">
+		<property name="userGroupServiceDelegate">
+			<ref bean="userGroupServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="wwPasswordHelp" class="com.fstx.stdlib2.authen.webwork.PasswordHelpAction" singleton="false">
+	</bean>
+	
+
+
+
+
+	
+	<!--application context is always a singleton...-->
+
+	<bean id="menuMineApplicationContext" 
+			class="com.fsrin.menumine.context.MenuMineApplicationContextImpl" 
+			singleton="true">
+		<property name="authenticator" >
+			<ref bean="stdlib2Authenticator" />
+		</property>
+	</bean>
+
+	<bean id="menuMineSessionContext" 
+			class="com.fsrin.menumine.context.MenuMineSessionContextImpl" 
+			singleton="false">
+		<property name="authorizer" >
+			<ref bean="stdlib2Authorizer" />
+		</property>
+		<property name="menuMineApplicationContext">
+			<ref bean="menuMineApplicationContext" />
+		</property>
+	</bean>
+
+
+	<bean id="myTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>	
+	</bean>
+	
+	<bean id="wwCommonDelete" class="com.fsrin.menumine.common.delete.webwork.CommonDeleteAction" singleton="false">
+	</bean>
+
+	
+	
+	<!-- Masterfood -->
+	<bean id="masterFoodDao" class="com.fsrin.menumine.core.menumine.masterfood.MasterFoodDaoImpl" singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="dataSessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="masterFoodServiceDelegate" class="com.fsrin.menumine.core.menumine.masterfood.MasterFoodServiceDelegateImpl" singleton="false"  >
+		<property name="masterFoodDao">
+			<ref bean="masterFoodDao" />
+		</property>
+	</bean>
+	
+	<bean id="chainDao" class="com.fsrin.menumine.core.menumine.chain.ChainDaoImpl" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="dataSessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="chainServiceDelegate" class="com.fsrin.menumine.core.menumine.chain.ChainServiceDelegateImpl" singleton="false"  >
+		<property name="chainDAO">
+			<ref bean="chainDao" />
+		</property>
+	</bean>
+	
+	<bean id="distinctQueryBuilder" class="com.fsrin.menumine.core.menumine.masterfood.DistinctQueryBuilder" singleton="true">
+		<property name="masterFoodDao">
+			<ref bean="masterFoodDao" />
+		</property>
+	</bean>
+
+	<bean id="sampleDistributionServiceDelegate" class="com.fsrin.menumine.core.menumine.SampleDistributionServiceDelegate" singleton="true">
+		<property name="masterFoodDao">
+			<ref bean="masterFoodDao" />
+		</property>
+	</bean>
+	
+	<!-- Saved Query -->
+	<bean id="filterParameterDao" class="com.fsrin.menumine.common.FilterParameterDaoImpl" singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>
+		
+	<bean id="masterFoodfilterParametersDao" class="com.fsrin.menumine.core.menumine.MasterFoodFilterParametersDaoImpl" singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>
+
+	<!--2006-01-30 RSC has data in it simply because that's mostly what it's used for. -->
+    <bean id="genericDaoData" class="com.fsrin.menumine.common.dao.GenericDAOImpl" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="dataSessionFactory" />
+		</property>
+	</bean>
+		
+	<!--2006-02-06 RSC Special For Admin -->
+    <bean id="abstractDaoAdmin" class="com.fsrin.menumine.common.dao.GenericDAOImpl" singleton="false" abstract="true">
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>
+
+
+    <bean id="genericDaoAdmin" class="com.fsrin.menumine.common.dao.GenericDAOImpl" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="chainfilterParametersDao" class="com.fsrin.menumine.core.menumine.chain.ChainFilterParametersDaoImpl" singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="savedQueryDao" class="com.fsrin.menumine.core.menumine.savedquery.SavedQueryDaoImpl" singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>	
+	
+	<bean id="savedQueryServiceDelegate" class="com.fsrin.menumine.core.menumine.savedquery.SavedQueryServiceDelegateImpl" singleton="false"  >
+		<property name="savedQueryDao">
+			<ref bean="savedQueryDao" />
+		</property>
+	</bean>	
+	
+	<bean id="savedQueryManager" 
+		class="com.fsrin.menumine.core.menumine.savedquery.SavedQueryManagerImpl" 
+		singleton="true"  >
+
+		<property name="savedQueryServiceDelegate">
+			<ref bean="savedQueryServiceDelegate" />
+		</property>
+	</bean>	
+	
+	
+	
+	
+	<bean id="fieldsToDisplayBeanDao" 
+		class="com.fsrin.menumine.core.menumine.FieldsToDisplayBeanDaoImpl" 
+		singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>		
+	
+	
+	<bean id="rollUpDao" class="com.fsrin.menumine.core.menumine.rollup.RollUpDaoImpl" singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>	
+	
+	<bean id="rollUpServiceDelegate" class="com.fsrin.menumine.core.menumine.rollup.RollUpServiceDelegateImpl" singleton="false"  >
+		<property name="rollUpDao">
+			<ref bean="rollUpDao" />
+		</property>
+	</bean>	
+	
+	
+	
+
+	<bean id="resetAction" 
+		class="com.fsrin.menumine.core.menumine.webwork.ResetAction" 
+		singleton="false" />
+	
+	<bean id="dessertMineAction" 
+		class="com.fsrin.menumine.core.dessertmine.xwork.DessertMineAction" 
+		singleton="false" />
+		
+	<bean id="ingredientMineAction" 
+		class="com.fsrin.menumine.core.ingredient.xwork.IngredientMineAction" 
+		singleton="false" />
+
+	<bean id="changeMineAction" 
+		class="com.fsrin.menumine.core.dessertmine.xwork.ChangeMineAction" 
+		singleton="false" />
+
+	
+
+	<bean id="useMenuMineAction" 
+		class="com.fsrin.menumine.core.menumine.webwork.MenuMineAction" 
+		singleton="false" />
+	
+	
+	
+	<bean id="menuMineAction" 
+		class="com.fsrin.menumine.core.menumine.webwork.GeneralMineAction" 
+			singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+		<property name="distinctQueryBuilder">
+			<ref bean="distinctQueryBuilder" />
+		</property>
+		<property name="savedQueryServiceDelegate">
+			<ref bean="savedQueryServiceDelegate" />
+		</property>
+		<property name="savedQueryManager" >
+			<ref bean="savedQueryManager" />
+		</property>
+	</bean>
+
+			
+	<bean id="menuMineDisplaySpreadSheetAction" parent="displayAction" class="com.fsrin.menumine.core.menumine.webwork.MenuMineDisplaySpreadsheetAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="menuMineDisplayStatisticalTableAction" parent="displayAction" class="com.fsrin.menumine.core.menumine.webwork.MenuMineDisplayStatisticalTableAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+   </bean>
+
+	<bean id="menuMineDisplayStatisticalTableActionV2" parent="displayAction" class="com.fsrin.menumine.core.menumine.webwork.MenuMineDisplayStatisticalTableActionV2" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+   </bean>
+   	
+   <!-- 2006-02-02
+    <bean id="cannedSchematicDAO" class="com.fsrin.menumine.common.dao.GenericDAOImpl" singleton="false" >
+		<property name="criteriaBuilder">	
+    		<bean class="com.fsrin.menumine.core.menumine.natlaccountbench.cannedschematic.CannedSchematicCriteriaBuilder"/>
+	   </property>
+	   <property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+   </bean>  
+   
+   <bean id="cannedSchematicServiceDelegate" class="com.fsrin.menumine.core.menumine.natlaccountbench.cannedschematic.CannedSchematicServiceDelegateImpl" singleton="false" >
+		<property name="genericDao">
+			<ref bean="cannedSchematicDAO" />
+		</property>
+   </bean>  
+   
+   <bean id="menumineViewCannedSchematicAction" class="com.fsrin.menumine.core.menumine.natlaccountbench.cannedschematic.xwork.ViewCannedSchematicAction" singleton="false" >
+
+	</bean>  
+   
+   <bean id="menumineNewCannedSchematicAction" class="com.fsrin.menumine.core.menumine.natlaccountbench.cannedschematic.xwork.NewCannedSchematicAction" singleton="false" >
+	</bean>       
+	
+   <bean id="menumineSelectCannedSchematicAction" class="com.fsrin.menumine.core.menumine.natlaccountbench.cannedschematic.xwork.SelectCannedSchematicAction" singleton="false" >
+		<property name="serviceDelegate">
+			<ref bean="cannedSchematicServiceDelegate" />
+		</property>
+	</bean>
+	
+	
+	<bean id="menumineListCannedSchematicAction" class="com.fsrin.menumine.core.menumine.natlaccountbench.cannedschematic.xwork.ListCannedSchematicAction" singleton="false" >
+		<property name="serviceDelegate">
+			<ref bean="cannedSchematicServiceDelegate" />
+		</property>
+   </bean> 
+   
+    <bean id="menumineEditCannedSchematicAction" class="com.fsrin.menumine.core.menumine.natlaccountbench.cannedschematic.xwork.EditCannedSchematicAction" singleton="false" >
+		<property name="serviceDelegate">
+			<ref bean="cannedSchematicServiceDelegate" />
+		</property>
+	</bean>
+   
+   -->
+   
+   	<bean id="menuMineDisplayNatlAccountBenchmarkAction" parent="displayAction" class="com.fsrin.menumine.core.menumine.natlaccountbench.xwork.MenuMineDisplayNatlAccountBenchmarkAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+
+	<bean id="menumineDisplayNatlAccountBenchmarkTrendAction" parent="displayAction" class="com.fsrin.menumine.core.menumine.natlaccountbench.xwork.MenuMineDisplayNatlAccountBenchmarkTrendAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	
+	<!-- 2006-02-02 RSC
+	<bean id="menuMineDisplayNatlAccountBenchmarkCannedReportAction" parent="displayAction" class="com.fsrin.menumine.core.menumine.natlaccountbench.xwork.MenuMineDisplayNatlAccountBenchmarkCannedReportAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	-->
+	
+	
+	<bean id="nationalAccountBenchmarkChartBuilder" 
+		class="com.fsrin.menumine.core.menumine.natlaccountbench.NationalAccountBenchmarkChartBuilder" 
+		singleton="false" />
+
+	    
+	<bean id="menumineNationalAccountBenchMarkGraphAction" class="com.fsrin.menumine.core.menumine.natlaccountbench.xwork.NationalAccountBenchmarkGraphAction" singleton="false" >
+		<property name="chartBuilder">
+			<ref bean="nationalAccountBenchmarkChartBuilder" />
+		</property>
+	</bean>	
+	
+	<!-- 2006-02-02
+	<bean id="menumineNationalAccountBenchMarkCannedGraphAction" class="com.fsrin.menumine.core.menumine.natlaccountbench.xwork.NationalAccountBenchmarkCannedGraphAction" singleton="false" >
+		<property name="chartBuilder">
+			<ref bean="nationalAccountBenchmarkChartBuilder" />
+		</property>
+	</bean>	
+	-->
+	
+	
+	
+	
+	<bean id="menumineDisplayNatlAccountBenchmarkControlAction" 
+		class="com.fsrin.menumine.core.menumine.natlaccountbench.xwork.MenuMineDisplayNatlAccountBenchmarkControllerAction" 
+		singleton="false" />
+	
+	<bean id="menuMineDisplayNatlAccountBenchmarkExcelAction" 
+		class="com.fsrin.menumine.core.menumine.natlaccountbench.xwork.NationalAccountBenchmarkExcelAction" 
+		singleton="false" >
+	</bean>
+	
+	<bean id="menuMineDisplayNatlAccountBenchmarkTrendExcelAction" 
+		class="com.fsrin.menumine.core.menumine.natlaccountbench.xwork.NationalAccountBenchmarkTrendExcelAction" 
+		singleton="false" />
+	
+	<!-- 2006-02-02 RSC
+	<bean id="menuMineDisplayNatlAccountBenchmarkCannedReportExcelAction" 
+		class="com.fsrin.menumine.core.menumine.natlaccountbench.xwork.NationalAccountBenchmarkCannedReportExcelAction" 
+		singleton="false" />
+		-->
+
+	<bean id="menuMineDisplayBuildRollUpAction" class="com.fsrin.menumine.core.menumine.rollup.xwork.MenuMineDisplayBuildRollUpAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+		<property name="rollUpServiceDelegate">
+			<ref bean="rollUpServiceDelegate" />
+		</property>
+	</bean>
+	
+	
+
+	<bean id="listSavedRollUpsAction" class="com.fsrin.menumine.core.menumine.rollup.xwork.ListSavedRollUpsAction" singleton="false" >
+		<property name="rollUpServiceDelegate">
+			<ref bean="rollUpServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="selectSavedRollUpAction" class="com.fsrin.menumine.core.menumine.rollup.xwork.MenuMineLoadRollUpAction" singleton="false" >
+		<property name="rollUpServiceDelegate">
+			<ref bean="rollUpServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="saveRollUpAction" class="com.fsrin.menumine.core.menumine.rollup.xwork.MenuMineSaveRollUpAction" singleton="false" >
+		<property name="rollUpServiceDelegate">
+			<ref bean="rollUpServiceDelegate" />
+		</property>
+	</bean>
+
+	<bean id="autoRollUpBuilderAction" parent="displayAction"  class="com.fsrin.menumine.core.menumine.rollup.xwork.AutoRollUpBuilderAction" singleton="false" >
+	<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="deleteRollUpAction" class="com.fsrin.menumine.core.menumine.rollup.xwork.MenuMineDeleteRollUpAction" singleton="false" >
+		<property name="rollUpServiceDelegate">
+			<ref bean="rollUpServiceDelegate" />
+		</property>
+	</bean>	
+
+	<bean id="menuMineFilterRollUpAction" 
+		class="com.fsrin.menumine.core.menumine.rollup.xwork.MenuMineFilterRollUpAction" 
+		singleton="false" />
+	
+	<bean id="menuMineAddRollUpAction" 
+		class="com.fsrin.menumine.core.menumine.rollup.xwork.MenuMineAddRollUpAction" 
+		singleton="false" />
+
+	<bean id="rollUpRemoveElementByLabelAndTermAction" 
+		class="com.fsrin.menumine.core.menumine.rollup.xwork.RemoveRollupElementByLabelAndTermAction" 
+		singleton="false" />
+
+	
+	<bean id="menuMineRemoveRollUpAction" 
+		class="com.fsrin.menumine.core.menumine.rollup.xwork.MenuMineRemoveRollUpAction" 
+		singleton="false" />
+
+	
+	<bean id="menuMineRemoveRollUpByLabelAction" 
+		class="com.fsrin.menumine.core.menumine.rollup.xwork.MenuMineRemoveRollUpByLabelAction" 
+		singleton="false" />
+
+	
+	<bean id="menuMineResetRollUpAction" 
+		class="com.fsrin.menumine.core.menumine.rollup.xwork.MenuMineResetRollUpAction" 
+		singleton="false" />
+
+
+	<bean id="addFilterEliminatorFromRollUpAction" 
+		class="com.fsrin.menumine.core.menumine.rollup.xwork.AddFilterEliminatorFromRollUpAction" 
+		singleton="false" />
+
+	
+	
+	<bean id="menuMineDisplayCategoryIncidenceAction"  parent="displayAction" class="com.fsrin.menumine.core.menumine.webwork.MenuMineDisplayCategoryIncidenceAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="menuMineDisplayItemsPerChainMenuingAction" parent="displayAction"  class="com.fsrin.menumine.core.menumine.webwork.MenuMineDisplayItemsPerChainMenuingAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="menuMineDisplayMedianPriceTrendAction" parent="displayAction" class="com.fsrin.menumine.core.menumine.webwork.MenuMineDisplayMedianPriceTrendAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="menuMineDisplayMeanPriceTrendAction"  
+			parent="displayAction" 
+			class="com.fsrin.menumine.core.menumine.webwork.MenuMineDisplayMeanPriceTrendAction" 
+			singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="menuMineDisplayCrossTabulationAction" parent="displayAction"  class="com.fsrin.menumine.core.menumine.webwork.MenuMineDisplayCrossTabulationAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="menuMineDisplayGraphAction" parent="displayAction" class="com.fsrin.menumine.core.menumine.webwork.MenuMineDisplayGraphAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="graphWriterUtil" class="com.fsrin.menumine.core.menumine.webwork.util.GraphWriterUtil" singleton="false">
+		<property name="tempFilePath">
+			<value>${graphics.tempgraphpath}</value>
+		</property>
+		<property name="graphPrefix">
+			<value>${graphics.graphprefix}</value>		
+		</property>	
+	</bean>
+	
+	<bean id="excelSupportUtil" class="com.fsrin.menumine.core.menumine.util.ExcelSupport" singleton="false">
+		<property name="tempFilePath">
+			<value>${excel.temppath}</value>
+		</property>
+		<property name="webPrefix">
+			<value>${excel.prefix}</value>		
+		</property>	
+	</bean>	
+	
+	<bean id="wwSampleDistributionMarketSegmentAction" class="com.fsrin.menumine.core.menumine.sampledistribution.xwork.SampleDistributionMarketSegmentAction" singleton="false" >
+		<property name="sampleDistributionServiceDelegate">
+			<ref bean="sampleDistributionServiceDelegate" />
+		</property>
+	</bean>	
+	
+	<bean id="wwSampleDistributionMarketSectorAction" class="com.fsrin.menumine.core.menumine.sampledistribution.xwork.SampleDistributionMarketSectorAction" singleton="false" >
+		<property name="sampleDistributionServiceDelegate">
+			<ref bean="sampleDistributionServiceDelegate" />
+		</property>
+		
+	</bean>	
+	
+	<bean id="wwSampleDistributionMenuPartAction" class="com.fsrin.menumine.core.menumine.sampledistribution.xwork.SampleDistributionMenuPartAction" singleton="false" >
+		<property name="sampleDistributionServiceDelegate">
+			<ref bean="sampleDistributionServiceDelegate" />
+		</property>
+		
+	</bean>	
+	
+	<bean id="wwSampleDistributionBasicProteinAction" class="com.fsrin.menumine.core.menumine.sampledistribution.xwork.SampleDistributionBasicProteinAction" singleton="false" >
+		<property name="sampleDistributionServiceDelegate">
+			<ref bean="sampleDistributionServiceDelegate" />
+		</property>
+		
+	</bean>	
+	
+	<bean id="wwSampleDistributionCuisineAction" class="com.fsrin.menumine.core.menumine.sampledistribution.xwork.SampleDistributionCuisineAction" singleton="false" >
+		<property name="sampleDistributionServiceDelegate">
+			<ref bean="sampleDistributionServiceDelegate" />
+		</property>
+		
+	</bean>	
+	
+	<bean id="wwSampleDistributionCookingMethodAction" class="com.fsrin.menumine.core.menumine.sampledistribution.xwork.SampleDistributionCookingMethodAction" singleton="false" >
+		<property name="sampleDistributionServiceDelegate">
+			<ref bean="sampleDistributionServiceDelegate" />
+		</property>
+		
+	</bean>	
+	
+	<bean id="wwSampleDistributionOperationNameAction" class="com.fsrin.menumine.core.menumine.sampledistribution.xwork.SampleDistributionOperationNameAction" singleton="false" >
+		<property name="sampleDistributionServiceDelegate">
+			<ref bean="sampleDistributionServiceDelegate" />
+		</property>
+		
+	</bean>	
+	
+	<bean id="wwSampleDistributionCuisineFamilyAction" class="com.fsrin.menumine.core.menumine.sampledistribution.xwork.SampleDistributionCuisineFamilyAction" singleton="false" >
+		<property name="sampleDistributionServiceDelegate">
+			<ref bean="sampleDistributionServiceDelegate" />
+		</property>
+		
+	</bean>	
+	
+	<bean id="wwSampleDistributionGenCookingMethodAction" class="com.fsrin.menumine.core.menumine.sampledistribution.xwork.SampleDistributionGenCookingMethodAction" singleton="false" >
+		<property name="sampleDistributionServiceDelegate">
+			<ref bean="sampleDistributionServiceDelegate" />
+		</property>
+		
+	</bean>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<bean id="wwSavedQueryListAction" class="com.fsrin.menumine.core.menumine.savedquery.xwork.SavedQueryListAction" singleton="false" >
+		<property name="savedQueryServiceDelegate">
+			<ref bean="savedQueryServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="wwSavedQueryListTemplatesAction" class="com.fsrin.menumine.core.menumine.savedquery.xwork.SavedQueryListTemplatesAction" singleton="false" >
+		<property name="savedQueryServiceDelegate">
+			<ref bean="savedQueryServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="wwSavedQueryModifyAction" 
+		class="com.fsrin.menumine.core.menumine.savedquery.xwork.SavedQueryModifyAction" 
+		singleton="false" >
+		<property name="savedQueryServiceDelegate">
+			<ref bean="savedQueryServiceDelegate" />
+		</property>
+	</bean>
+
+
+	
+	<bean id="wwViewGraph" class="com.fsrin.menumine.core.menumine.webwork.ViewGraphAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+
+	</bean>
+	
+	<bean id="wwViewExcel" class="com.fsrin.menumine.core.menumine.webwork.ViewExcelAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+
+	</bean>
+	
+	<bean id="wwStatisticalTableExcel" 
+		class="com.fsrin.menumine.core.menumine.webwork.ViewStatisticalTableExcelAction" 
+		singleton="false" />
+
+	
+	<bean id="wwCrossTabExcel" 
+		class="com.fsrin.menumine.core.menumine.webwork.ViewCrossTabulationAsExcelAction" 
+		singleton="false" />
+
+	
+	<bean id="wwCategoryIncidenceExcel" 
+		class="com.fsrin.menumine.core.menumine.webwork.ViewCategoryIncidenceAsExcelAction" 
+		singleton="false" />
+
+	
+	<bean id="wwItemsPerChainMenuingExcel" 	
+		class="com.fsrin.menumine.core.menumine.webwork.ViewItemsPerChainMenuingAsExcelAction" 
+		singleton="false" />
+
+	
+	<bean id="wwViewCategoryIncidenceSectorGraph" 
+		class="com.fsrin.menumine.core.menumine.webwork.ViewCategoryIncidenceSectorGraphAction" 
+		singleton="false" />
+
+	
+	<bean id="wwViewItemsPerChainMenuingSectorGraph" 
+		class="com.fsrin.menumine.core.menumine.webwork.ViewItemsPerChainMenuingSectorGraphAction" 
+		singleton="false" />
+
+	
+
+	<bean id="wwViewMeanPriceTrendLineGraphAction" 
+		class="com.fsrin.menumine.core.menumine.webwork.ViewMeanPriceTrendlineGraphAction" 
+		singleton="false" />
+
+
+	<bean id="wwViewMedianPriceTrendLineGraphAction" 
+		class="com.fsrin.menumine.core.menumine.webwork.ViewMedianPriceTrendlineGraphAction" 
+		singleton="false" />
+
+	
+	<bean id="wwMedianTrendExcel" 
+		class="com.fsrin.menumine.core.menumine.webwork.ViewMedianTrendExcelAction" 
+		singleton="false" />
+
+	
+	<bean id="wwMeanTrendExcel" 
+		class="com.fsrin.menumine.core.menumine.webwork.ViewMeanTrendExcelAction" 
+		singleton="false" />
+
+			
+	
+
+	
+	<bean id="menuBookBuilder" class="com.fsrin.menumine.core.menubook.MenuBookBuilder" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+
+	<bean id="menuBookTrendBuilder" class="com.fsrin.menumine.core.menubook.MenuBookTrendBuilder" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+	
+	
+	
+	
+	<!-- Chain Stat -->
+	<bean id="chainStatDao" class="com.fsrin.menumine.core.chainstat.ChainStatDaoImpl" >
+		<property name="sessionFactory">
+			<ref bean="dataSessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="chainStatServiceDelegate" class="com.fsrin.menumine.core.chainstat.ChainStatServiceDelegateImpl" singleton="false"  >
+		<property name="chainStatDao">
+			<ref bean="chainStatDao" />
+		</property>
+	</bean>
+	
+	
+	<!-- Chain Stat Actions -->
+	<bean id="chainStatListAction" class="com.fsrin.menumine.core.chainstat.webwork.ChainStatListAction" singleton="false" >
+		<property name="chainStatServiceDelegate">
+			 <ref bean="chainStatServiceDelegate" />
+		</property>
+
+	</bean>
+	
+	<bean id="chainStatDetailAction" class="com.fsrin.menumine.core.chainstat.webwork.ChainStatDetailAction" singleton="false" >
+		<property name="chainStatServiceDelegate">
+			 <ref bean="chainStatServiceDelegate" />
+		</property>
+	</bean>
+
+			
+	<bean id="chainStatDetailExcelAction" class="com.fsrin.menumine.core.chainstat.webwork.ChainStatDetailExcelAction" singleton="false" >
+	</bean>
+	
+	<bean id="chainStatMenuCamAction" class="com.fsrin.menumine.core.chainstat.webwork.ChainStatMenuCamAction" singleton="false" >
+		<property name="chainStatServiceDelegate">
+			 <ref bean="chainStatServiceDelegate" />
+		</property>
+		<property name="menuCamManager">
+			 <ref bean="menuCamManager" />
+		</property>
+	</bean>
+	
+	<!-- 2006-01-31 RSC Dead
+	<bean id="chainStatRssAction" class="com.fsrin.menumine.core.chainrss.xwork.ChainStatRssAction" singleton="false" >
+		<property name="chainStatServiceDelegate">
+			 <ref bean="chainStatServiceDelegate" />
+		</property>
+		<property name="rssFeedManager">
+			 <ref bean="rssFeedManager" />
+		</property>
+	</bean>
+	-->
+	
+	<!--
+	<bean id="efoodletterRssAction" class="com.fsrin.menumine.core.efoodletter.xwork.EfoodLetterRssAction" singleton="false" >
+
+	</bean>	
+	-->
+	
+	
+	<bean id="menuCamManager" 
+		class="com.fsrin.menumine.core.menucam.MenuCamManager" 
+		singleton="false" />
+
+
+	<!-- 2006-01-31 RSC DOA
+	<bean id="rssFeedManager" class="com.fsrin.menumine.core.chainrss.ChainRssFeedManager" singleton="false" >
+	</bean>	
+	-->
+	
+	
+	
+	<!-- MenuBook -->
+	<bean id="menuBookAction" class="com.fsrin.menumine.core.menubook.xwork.MenuBookAction" singleton="false" >
+		<property name="menuBookBuilder">
+			 <ref bean="menuBookBuilder" />
+		</property>
+	</bean>
+	
+	<bean id="menuBookTrendAction" class="com.fsrin.menumine.core.menubook.xwork.MenuBookAction" singleton="false" >
+		<property name="menuBookBuilder">
+			 <ref bean="menuBookTrendBuilder" />
+		</property>
+	</bean>
+	          
+	<bean id="menuBookTrendGraphAction" class="com.fsrin.menumine.core.menubook.xwork.MenuBookTrendGraphAction" singleton="false">
+	</bean>
+	
+	<bean id="menuBookExcelAction" class="com.fsrin.menumine.core.menubook.xwork.MenuBookExcelAction" singleton="false" >
+	</bean>
+	<bean id="menuBookTrendExcelAction" class="com.fsrin.menumine.core.menubook.xwork.MenuBookTrendExcelAction" singleton="false" >
+	</bean>	
+
+	
+	
+		<!-- MESSAGES -->
+	<bean id="mailSettingsBean" class="com.fsrin.menumine.messages.MailSettingsBean" >
+		<property name="smtpServer">
+			<value>localhost</value>
+		</property>	
+		<property name="username">
+			<value>menumine@fsrin.com</value>
+		</property>	
+		<property name="password">
+			<value>5tgb6yhN</value>
+		</property>	
+
+	</bean>
+	
+	<!-- 2006-01-20 RSC Do We Need These?
+
+	-->
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+			
+	      <!-- RSC 2006-01-20 not in use. <ref bean="sampleDistributionInitializerTrigger"/> -->
+	      <!-- <ref bean="savedQueryBuilderTrigger"/> -->
+	      <!-- RSC 2006-01-20 not in use.  <ref bean="foodServiceNewsTrigger"/> -->
+	      <!-- <ref bean="queryManagerTrigger"/> -->
+	    </list>
+	  </property>
+	</bean>
+	
+	
+	
+	<!-- 2006-02-05 RSC Not using.
+	<bean id="queryManagerTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+	  <property name="jobDetail">
+	    	<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    	    <property name="targetObject">
+	    	    		 <ref bean="completedQueryManager"/>
+	            </property>
+	            <property name="targetMethod">
+	            	<value>process</value>
+    	       </property>
+             </bean>
+	  </property>
+	  <property name="startDelay">
+	    <value>7500</value>
+	  </property>
+	  <property name="repeatInterval">
+	    <value>10000</value>
+	  </property>
+	</bean>
+	-->
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--
+		2006-01-31 RSC DOA
+	<bean id="foodServiceNewsRssFeedManager" 
+		class="com.fsrin.menumine.core.foodservicenews.FoodServiceNewsRssFeedManager" singleton="true" >
+	</bean>
+	-->
+	
+	
+	<!--
+	    2005-6-22 Fun with inner beans!  Since we don't need to reuse the components, this is
+	    easier to read and understand.
+	-->
+	<!-- 2006-01-20 RSC Not apparently in use.
+	<bean id="foodServiceNewsTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+	  <property name="jobDetail">
+	    	<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    	    <property name="targetObject">
+	    	    		 <ref bean="foodServiceNewsRssFeedManager"/>
+	            </property>
+	            <property name="targetMethod">
+	            	<value>updateEntries</value>
+    	       </property>
+             </bean>
+	  </property>
+	  <property name="startDelay">
+	    <value>7500</value>
+	  </property>
+	  <property name="repeatInterval">
+	    <value>300000</value>
+	  </property>
+	</bean>
+	-->
+	
+	
+	<bean id="savedQueryBuilderTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+	  <property name="jobDetail">
+	    <ref bean="savedQueryBuilderJob"/>
+	  </property>
+	  <property name="startDelay">
+	    <value>7500</value>
+	  </property>
+	  <property name="repeatInterval">
+	    <value>5000</value>
+	  </property>
+	  
+	</bean>
+	
+	
+	<bean id="savedQueryBuilderJob" 
+	  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject">
+	    	<ref bean="savedQueryManager"/>
+	    </property>
+	    <property name="targetMethod">
+	    	<value>process</value>
+    	</property>
+	</bean>	
+	
+	
+	<!--
+		RSC 2006-01-20 Execute method is commented out.
+	<bean id="sampleDistributionInitializerProxy" 
+		class="com.fsrin.menumine.core.menumine.SampleDistributionInitializerProxy" singleton="false">
+		<property name="sampleDistributionServiceDelegate">
+			<ref bean="sampleDistributionServiceDelegate" />
+		</property>
+		
+		</bean>
+
+	<bean id="sampleDistributionInitializerTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+	  <property name="jobDetail">
+	    <ref bean="sampleDistributionInitializerJob"/>
+	  </property>
+	  <property name="startDelay">
+	    <value>10000</value>
+	  </property>
+	  <property name="repeatInterval">
+	    <value>90000</value>
+	  </property>  
+	</bean>
+
+	<bean id="sampleDistributionInitializerJob" 
+	  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject">
+	    	<ref bean="sampleDistributionInitializerProxy"/>
+	    </property>
+	    <property name="targetMethod">
+	    	<value>execute</value>
+    	</property>
+	</bean>	
+	-->
+	
+	
+	<!-- Profiler -->
+	 <bean id="profilerExcelAction" 
+	 	class="com.fsrin.menumine.core.profiler.xwork.ProfileExcelAction" 
+	 	singleton="false" />
+
+	
+	
+	<bean id="profilerApplicationChartAction" 
+		class="com.fsrin.menumine.core.profiler.xwork.ProfilerChartAction" 
+		singleton="false" />
+
+	
+	<!--
+	<bean id="masterFoodProfilerAction" class="com.fsrin.menumine.core.profiler.xwork.ProfileAction" singleton="false" >
+		<property name="profiler">
+			<ref bean="masterFoodProfiler" />
+		</property>
+	</bean>
+	
+	
+	<bean id="masterFoodProfiler" class="com.fsrin.menumine.core.profiler.ProfilerImpl" singleton="false" >
+		<property name="serviceDelegate">
+			<ref bean="masterFoodProfileServiceDelegate" />
+		</property>
+		<property name="chainDao">
+			<ref bean="chainDao" />
+		</property>
+		<property name="profile">
+			<list>
+			<ref bean="masterFoodSeasoningProfile" />
+			<ref bean="masterFoodToppingFilledIngredProfile" />
+			</list>
+		</property>			
+			
+		
+	</bean>
+
+	
+	<bean id="masterFoodSeasoningProfile" class="com.fsrin.menumine.core.profiler.test.MasterFoodSeasoningProfile" singleton="false" >
+		<property name="name"> 
+			<value>Seasoning</value>
+		</property>
+	</bean>
+	<bean id="masterFoodToppingFilledIngredProfile" class="com.fsrin.menumine.core.profiler.test.MasterFoodToppingFilledIngredProfile" singleton="false"  >
+		<property name="name"> 
+			<value>ToppingFilledIngred</value>
+		</property>
+	</bean>
+	
+	<bean id="masterFoodProfileServiceDelegate" class="com.fsrin.menumine.core.profiler.ProfileServiceDelegate" singleton="false" >
+		<property name="dao">
+
+			<ref bean="masterFoodProfileDao" />
+		</property>
+	</bean>
+	
+	<bean id="mockChainDao" class="com.fsrin.menumine.core.profiler.test.MockChainDao" singleton="false" >
+	</bean>
+												
+	<bean id="mockMasterFood5000GarlicDao" class="com.fsrin.menumine.core.profiler.test.MockMasterFood5000GarlicDao"  singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="dataSessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="masterFoodProfileDao" class="com.fsrin.menumine.core.profiler.ProfileDao"  singleton="false"  >
+		<property name="sessionFactory">
+			<ref bean="dataSessionFactory" />
+		</property>
+		<property name="profileCriteriaBuilder">
+			<ref bean="masterFoodProfileCriteriaBuilder" />
+		</property>
+
+	</bean>
+	
+	<bean id="masterFoodProfileCriteriaBuilder" 
+		class="com.fsrin.menumine.core.profiler.MasterFoodProfileCriteriaBuilder" 
+		singleton="false" />
+	-->
+	
+	<!-- Flavor Profile -->
+	<bean id="flavorProfilerAction" class="com.fsrin.menumine.core.profiler.xwork.ProfileAction" singleton="false" >
+		<property name="fieldListProvider">
+			<bean class="com.fsrin.menumine.core.profiler.aggregation.ProfileFieldListProviderFlavorImpl" />
+		</property>
+	</bean>
+	
+	<!-- Protein Profile -->
+	<bean id="proteinProfilerAction" class="com.fsrin.menumine.core.profiler.xwork.ProfileAction" singleton="false" >
+		<property name="fieldListProvider">
+			<bean class="com.fsrin.menumine.core.profiler.aggregation.ProfileFieldListProviderProteinImpl" />
+		</property>
+	</bean>
+
+	<!-- Carbo Profile -->
+	<bean id="carboProfilerAction" class="com.fsrin.menumine.core.profiler.xwork.ProfileAction" singleton="false" >
+		<property name="fieldListProvider">
+			<bean class="com.fsrin.menumine.core.profiler.aggregation.ProfileFieldListProviderCarboImpl" />
+		</property>
+	</bean>
+
+	<!-- Dessert Profile -->
+	<bean id="dessertProfilerAction" class="com.fsrin.menumine.core.profiler.xwork.ProfileAction" singleton="false" >
+		<property name="fieldListProvider">
+			<bean class="com.fsrin.menumine.core.profiler.aggregation.ProfileFieldListProviderDessertImpl" />
+		</property>
+	</bean>
+
+	<!-- Veggie Profile -->
+	<bean id="veggieProfilerAction" class="com.fsrin.menumine.core.profiler.xwork.ProfileAction" singleton="false" >
+		<property name="fieldListProvider">
+			<bean class="com.fsrin.menumine.core.profiler.aggregation.ProfileFieldListProviderVeggieImpl" />
+		</property>
+	</bean>
+
+
+	
+	<!-- Healthy Profile -->
+	<bean id="healthyProfilerAction" class="com.fsrin.menumine.core.profiler.xwork.ProfileAction" singleton="false" >
+		<property name="fieldListProvider">
+			<bean class="com.fsrin.menumine.core.profiler.aggregation.ProfileFieldListProviderHealthyImpl" />
+		</property>
+	</bean>
+
+		<!-- Market Profile -->
+	<bean id="marketProfilerAction" class="com.fsrin.menumine.core.profiler.xwork.ProfileAction" singleton="false" >
+		<property name="fieldListProvider">
+			<bean class="com.fsrin.menumine.core.profiler.aggregation.ProfileFieldListProviderMarketImpl" />
+		</property>
+	</bean>
+
+
+	
+
+	
+	<!-- Login History -->
+	<bean id="loginHistoryDao" class="com.fstx.stdlib2.authen.LoginHistoryDao"   singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="adminSessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="loginHistoryBD" class="com.fstx.stdlib2.authen.LoginHistoryBD"   singleton="false" >
+		<property name="loginHistoryDao">
+			<ref bean="loginHistoryDao" />
+		</property>
+	</bean>
+	
+	<bean id="loginHistoryEventListener" class="com.fsrin.menumine.loginHistory.LoginHistoryEventListener"   singleton="false" >
+		<property name="loginHistoryBD">
+			<ref bean="loginHistoryBD" />
+		</property>
+	</bean>
+	
+	<bean id="loginHistoryListAction" class="com.fstx.stdlib2.authen.webwork.LoginHistoryListAction"   singleton="false" >
+		<property name="loginHistoryBD">
+			<ref bean="loginHistoryBD" />
+		</property>
+	</bean>
+
+	
+
+	
+	<bean id="authorizationBeanInterceptor" class="com.fsrin.menumine.authorization.xwork.AuthorizationBeanInterceptor"   singleton="false" >
+		<property name="authorizationManager">
+			<ref bean="authorizationManager" />
+		</property>
+
+	</bean>		
+	
+	
+
+	<bean id="authorizationManager" class="com.fsrin.menumine.authorization.AuthorizationManagerImpl"   singleton="false" >
+		<property name="groupRightServiceDelegate">
+			<ref bean="groupRightServiceDelegate" />
+		</property>
+	</bean>
+
+	
+	<!--Chain Map -->
+	<bean id="chainMapDAO" class="com.fsrin.menumine.common.dao.GenericDAOImpl" singleton="false" >
+		<property name="criteriaBuilder">	
+    		<bean class="com.fsrin.menumine.core.chainmap.ChainStateCountCriteriaBuilder"/>
+	   </property>
+	   <property name="sessionFactory">
+			<ref bean="dataSessionFactory" />
+		</property>
+   </bean>  
+   
+   <bean id="chainStateCountServiceDelegate" class="com.fsrin.menumine.core.chainmap.ChainStateCountServiceDelegateImpl" singleton="false" >
+		<property name="genericDao">
+			<ref bean="chainMapDAO" />
+		</property>
+   </bean>  
+	
+   
+   <bean id="chainMapSetTargetCollectionAction" class="com.fsrin.menumine.core.chainmap.xwork.ChainMapSetTargetCollectionAction" singleton="false" >
+   		<property name="serviceDelegate">
+			<ref bean="chainStateCountServiceDelegate" />
+		</property>
+   </bean>  
+   
+   <bean id="chainMapAction" class="com.fsrin.menumine.core.chainmap.xwork.ChainMapAction" singleton="false" >
+   		<property name="serviceDelegate">
+			<ref bean="chainStateCountServiceDelegate" />
+		</property>
+		<property name="baseCensusMapPath">
+			<value>${graphics.rootpath}USAmapWhiteBG.gif</value>
+		</property>		
+		<property name="baseStateMapPath">
+			<value>${graphics.rootpath}USAmap3.gif</value>
+		</property>			
+   </bean>  
+   
+  <bean id="chainMapExcelAction" class="com.fsrin.menumine.core.chainmap.xwork.ChainMapExcelAction" singleton="false" >
+   		
+   </bean>  
+   
+   <!-- 2006-09-13 reid@fivesticks.com no longer using.
+   <bean id="chainMapImageAction" class="com.fsrin.menumine.core.chainmap.xwork.ChainMapBuildImageAction" singleton="false" >	
+   	<property name="map">
+		<value>${graphics.rootpath}USAmap.gif</value>
+	</property>
+   </bean> -->
+   
+
+   
+   <!--MenuMineExpress -->
+   <!-- 2006-03-30 Updated to V3 -->
+   <bean id="menuMineExpressAction" 
+		class="com.fsrin.menumine.core.menumine.express.xwork.MenuMineExpressActionV3" 
+		singleton="false" >	
+		<!-- 2006-01-24 RSC
+   		<property name="expressQueryBuilder">
+			<ref bean="menuMineExpressQueryBuilder" />
+		</property>
+		-->
+		<!-- 2006-01-24 RSC
+		<property name="masterFoodKeywordQueryBuilder">
+           <ref bean="masterFoodKeywordQueryBuilder"/>
+		</property>
+		-->
+   </bean>
+	
+   	<!-- 2006-02-08 RSC
+    <bean id="menuMineExpressQueryBuilder" class="com.fsrin.menumine.core.menumine.express.MenuMineExpressQueryBuilderStandardImpl" singleton="false" >	
+   	 <property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+	</property>
+	   	 <property name="distinctQueryBuilder">
+			<ref bean="distinctQueryBuilder" />
+	</property>
+   </bean>
+   -->
+
+	<!-- 2006-01-24 RSC
+    <bean id="menuMineMasterFoodExpressQueryBuilder" 
+		class="com.fsrin.menumine.core.menumine.express.MenuMineMasterFoodExpressQueryBuilder" singleton="false" >	
+   	 <property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+	</property>
+	   	 <property name="distinctQueryBuilder">
+			<ref bean="distinctQueryBuilder" />
+	</property>
+   </bean>
+
+    <bean id="masterFoodKeywordQueryBuilder" 
+			class="com.fsrin.menumine.core.menumine.express.MasterFoodKeywordQueryBuilder" 
+			singleton="false">
+        <property name="masterFoodServiceDelegate">
+            <ref bean="masterFoodServiceDelegate"/>
+        </property>
+        <property name="distinctQueryBuilder">
+            <ref bean="distinctQueryBuilder" />
+        </property>
+    </bean>
+    -->
+    
+    <bean id="expressQueryParameterDecorator" 
+    	class="com.fsrin.menumine.core.menumine.express.ParameterDecoratorExpressQueryImpl"
+    	singleton="false" />
+   
+     <bean id="saveQueryAction"
+     	class="com.fsrin.menumine.core.menumine.savedquery.xwork.SaveAsNewQueryAction" singleton="false" >
+		<property name="savedQueryManager">
+			<ref bean="savedQueryManager" />
+		</property>
+		<property name="savedQueryServiceDelegate"> 
+			<ref bean="savedQueryServiceDelegate" />
+		</property>
+		<property name="userGroupServiceDelegate">
+			<ref bean="userGroupServiceDelegate" />
+		</property>
+    </bean>
+    
+     <bean id="loadQueryAction"
+     	class="com.fsrin.menumine.core.menumine.savedquery.xwork.LoadQueryAction" singleton="false" >
+		<property name="savedQueryManager">
+			<ref bean="savedQueryManager" />
+		</property>
+    </bean>    
+    
+    <bean id="emptyMenuMineAction" parent="displayAction"
+    	class="com.fsrin.menumine.core.menumine.webwork.EmptyMenuMineAction" singleton="false" >
+		<property name="masterFoodServiceDelegate">
+			<ref bean="masterFoodServiceDelegate" />
+		</property>
+	</bean>
+
+	<bean id="userPreferenceDao" parent="abstractDaoAdmin" singleton="false" >
+		<property name="criteriaBuilder">
+			<bean class="com.fsrin.menumine.users.UserPreferenceCriteriaBuilder" />
+		</property>
+	</bean>
+	
+	<bean id="userPreferenceServiceDelegate" 
+		class="com.fsrin.menumine.users.UserPreferenceServiceDelegate" singleton="false" >
+		<property name="dao">
+			<ref bean="userPreferenceDao" />
+		</property>
+	</bean>
+</beans>
+

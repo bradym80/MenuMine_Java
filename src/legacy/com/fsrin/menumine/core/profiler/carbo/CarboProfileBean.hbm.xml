@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fsrin.menumine.core.profiler.carbo.CarboProfileBean" table="tblmasterfood" lazy="true" mutable="false">
+    <id name="id" column="ID" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+	<!-- 2006-02-07 RSC
+	<many-to-one name="chain" class="com.fsrin.menumine.core.menumine.chain.Chain"  column="Chain" property-ref="operationName"/>
+	-->
+		
+	<property name="menuItem" 
+		column="MenuItem" 
+		type="string" 
+		length="255" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="itemDescription" 
+		column="ItemDescription" 
+		type="string" 
+		length="65536" 
+		not-null="false" 
+		unique="false" />		
+	
+	<property name="carboType" 
+		column="CarboType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />		
+	
+
+	<property name="carboAccompName" 
+		column="CarboAccompName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="carboTopName" 
+		column="CarboTopName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+	<property name="otherAccompaniments" 
+		column="OtherAccompaniments" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="otherIngredName" 
+		column="OtherIngredName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="otherToppings" 
+		column="OtherToppings" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="stuffName" 
+		column="[Stuff Name]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+    	<!-- 2006-02-07 RSC Added ... -->
+	<property name="sectorName" 
+		column="SectorName" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+	
+	<property name="segment" 
+		column="Segment" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="operationName" 
+		column="OperationName" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="yearPutInDatabase" 
+		column="YearPutInDatabase" 
+		type="java.lang.Integer" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="hqState" 
+		column="HQState" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="hqRegion" 
+		column="HQRegion" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="operatorType" 
+		column="OperatorType" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="countryLoc" 
+		column="CountryLoc" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />	
+	
+</class>
+  
+ 
+  
+
+
+</hibernate-mapping>

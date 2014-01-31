@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+
+
+
+  <class name="com.fsrin.menumine.core.menumine.rollup.RollUpOptions" table="rollupoptions" >
+    <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+    
+
+	 <set name="rollUpElements" table="rollUpElement" cascade="all" lazy="false">
+	       <key column="rollUpElementsId"/>
+	        <one-to-many class="com.fsrin.menumine.core.menumine.rollup.RollUpElement"/>
+	    </set>
+	
+	 
+     <property name="name" 
+		column="name" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+	  
+    <property name="userName" 
+		column="userName" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="groupName" 
+		column="groupName" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="otherItemRollUpType" 
+		column="otherItemRollUpType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="targetFieldName" 
+		column="targetFieldName" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+
+		
+		
+				
+	<property name="permission" 
+		column="permission" 
+		type="int" 
+		not-null="false" 
+		unique="false" />
+   
+
+  </class>
+  
+</hibernate-mapping>

@@ -1,0 +1,843 @@
+body {
+	font-family: Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:14px;
+	
+}
+ 
+th{
+	font-size:12px;
+	background-color:#CCCCCC;
+	padding-left:10px;
+}
+p{
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:12px;
+}
+
+.headerselectBackground {
+	width:100px
+} 
+
+.headerselect {
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:13px; 
+	padding:0px;
+}
+ 
+
+.headerBGProduct { 
+	font-weight: bold;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:13px; 
+	padding:0px;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #3399FF;
+	
+} 
+.headerBGProductRight { 
+	background-image: url(../img/fade-section-header-positio.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #3399FF;
+	
+	
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #3399FF;
+	
+} 
+
+.headerBGProductFilter { 
+
+	
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #3399FF;
+	
+	
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #3399FF;
+	
+} 
+
+
+
+.headerBGPricing { 
+	font-weight: bold;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:13px; 
+	padding:0px;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #6699CC;
+	
+} 
+.headerBGPricingRight { 
+	background-image: url(../img/fade-section-header-prices.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #6699CC;
+
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #6699CC;	
+} 
+.headerBGPricingBold{ 
+	font-weight: bold;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:11px; 
+} 
+
+
+.headerBGPricingFilter { 
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #6699CC;
+
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #6699CC;	
+} 
+
+
+
+.headerBGFlavor { 
+	font-weight: bold;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:13px; 
+	padding:0px;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #6699FF;
+	
+} 
+.headerBGFlavorRightSmallFont { 
+	background-image: url(../img/fade-section-header-flavors.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	
+	font-weight: bold;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:11px;
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #6699FF;
+
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #6699FF;	
+} 
+
+.headerBGFlavorRight { 
+	background-image: url(../img/fade-section-header-flavors.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	
+	font-weight: bold;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:13px;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #6699FF;
+
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #6699FF;	
+} 
+
+.headerBGFlavorFilter { 
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #6699FF;
+
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #6699FF;	
+} 
+
+
+.headerBGIngred { 
+	font-weight: bold;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:13px; 
+	padding:0px;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #66CCFF;
+	
+} 
+.headerBGIngredRight { 
+	background-image: url(../img/fade-section-header-foods.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #66CCFF;
+
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #66CCFF;	
+} 
+
+.headerBGIngredRightSmallFont { 
+	background-image: url(../img/fade-section-header-foods.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	
+	
+	font-weight: bold;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:11px;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #66CCFF;
+
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #66CCFF;	
+} 
+
+
+.headerBGIngredFilter { 
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #66CCFF;
+
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #66CCFF;	
+}
+
+.headerBGProductBiz { 
+	font-weight: bold;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:13px; 
+	padding:0px;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #99CCFF;
+	
+} 
+.headerBGProductBizRight { 
+	background-image: url(../img/fade-section-header-places.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #99CCFF;
+
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #99CCFF;	
+} 
+
+.headerBGProductBizFilter { 
+
+	
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #99CCFF;
+
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #99CCFF;	
+} 
+
+
+
+
+.filterBG { 
+	background-color:#FFFFFF;
+}  
+.smallFont {
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:10px; 
+} 
+
+.mediumFont {
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:12px; 
+} 
+
+.largeFont {
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:14px; 
+} 
+
+.mainLinks {
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+	color:#666666;
+	text-decoration:none;
+}
+
+
+.headline {
+	font-size: 24px;
+	margin-bottom:0px;
+	padding-bottom:0px;
+	border-bottom:0px;
+}
+ 
+ 	.spreadsheetTitle
+	{
+		font-size:20px;
+		font-weight:bold;
+		text-decoration:none;
+	}
+	
+	.sortByHeader{
+		font-size: 8px;
+		text-decoration:none;
+	}
+    .headerField{
+		font-size:12px;
+		background-color:#CCCCCC;
+		padding-left:10px;
+	}
+	
+
+	.filterFields {
+		font-size:10px;
+		width: 200px;
+		background-color:#FFFF66;	
+	}	    
+	 
+	.filterFieldsPrimary { 
+		font-size:10px;
+		width: 200px;
+		background-color:lightgrey;	
+	}
+
+	.filterFieldsHistory{ 
+		font-size:10px;
+		width: 219px;
+		background-color:lightgrey;	
+	}
+	.filterFieldsSecondary {
+		font-size:10px;
+		width: 200px;
+		background-color:lightgrey;	
+	}
+
+	.spreadsheetName{
+		font-size:10px;
+		width: 155px;
+		background-color:lightgrey;	
+	}	
+	
+	.filterFieldsLike {
+		font-size:10px;
+		width: 200px;
+		background-color:lightgrey;	
+	}	
+	
+	.filterFieldsSort {
+		font-size:10px;
+		width: 200px;
+		
+	}
+	.graphFields {
+		font-size:10px;
+		width: 200px;
+		
+	}
+	
+	.filterButtons{
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px;
+		width: 219px;
+			
+		
+	}
+	
+	.filterButtonsTopSubmit{
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px;
+		width: 122px;
+			
+		
+	}
+	.filterButtonsTopReset{
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px;
+		width: 91px;
+			
+	}
+
+	.results {
+		border-width:thin;
+		border-collapse:collapse;
+		border-color:#000000;
+		vertical-align:top;
+		padding:1px;
+		}
+		
+	.results_cell {
+		vertical-align:top;
+		padding:1px;	
+	}			
+	
+	
+	
+	 .incidenceSector {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px;
+		font-weight:bold; 
+		vertical-align:top;
+		padding:1px;	
+		background-color:#CCCCCC;
+	}			
+	 
+	.results_cellA {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		vertical-align:top;
+		padding:1px;	
+		background-color:#CCCCCC;
+	}			
+	.results_cellB {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		vertical-align:top; 
+		padding:1px; 
+		background-color:#EEEEEE;	
+	}	
+	.resultHeader
+	 {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		vertical-align:top; 
+		padding:1px; 
+		
+	}	
+	
+	.chainStatHeader
+	 {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		font-weight:bold;
+		vertical-align:top; 
+		padding:1px; 
+		background-color:#EEEEEE;	
+	 }	
+	
+	.chainStatResult
+	 {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		vertical-align:top; 
+		padding:1px; 	
+	 }
+		
+	.javascriptLink {
+		text-decoration:none;
+	
+	}
+	
+	
+	.imageDiv{
+		 width:8px;
+		 height:8px;
+		 background-image:url(img/collapse.gif); 
+		 background-repeat:no-repeat;
+	}
+	.div_header {
+	
+	position: relative;
+	top: 0px;
+	left: 0px;
+	height: 91px;
+	width: 209px;
+}
+
+.tabSelected { 
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:14px; 
+	color:black;
+	vertical-align:middle; 
+	padding:0px; 	
+	background-color:#3399FF;
+	font-weight:bold;
+	text-decoration:none;
+} 
+A.menuLink{
+text-decoration:none;
+color:black;
+}
+.menuRedNew {
+	font-size: .9em;
+	color:red;
+}
+.tabNotSelected { 
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:14px; 
+	color:black;
+	vertical-align:middle; 
+	padding:0px; 	
+	background-color:#99CCFF;
+	font-weight:bold;
+} 
+.menuOptions{
+	padding:0px;	
+	border-width:0px;
+	background-color:#1399FF;
+	
+	}
+body {
+	margin: 0px;	
+}
+
+.pageHeaderFade {
+	
+	
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #000000;
+}
+
+.pageHeader {
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #000000;
+}
+
+.mainMenu {
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+.sectionTable {
+	border: thin solid #999999;
+}
+
+
+
+
+.sectionHeader {
+	background-image: url(img/fade-section-header.jpg);
+	background-position:right;
+	background-repeat:no-repeat;
+	padding-left: 5px;
+	height: 24px;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-align:left;
+	color:#333333;
+	vertical-align: middle;
+	border-bottom: thin solid #999999
+}
+
+.sectionBody {
+	padding: 1px;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-align:left;
+	color:#333333;
+	vertical-align: top;
+}
+
+.mainHeader {
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	text-align:left;
+	color:#2F68A3;
+	vertical-align: middle;
+	border-bottom: thin solid #999999
+	
+}
+
+A.mainHeaderLink{
+text-decoration:none;
+color:#2F68A3;
+}
+
+.preLoginForm {
+	font-family: Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #666666;
+	text-align:right;
+}
+
+.preLoginHeader {
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #666666;
+}
+
+.preLoginOverview {
+	font-family: Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #666666;
+	border-top-width: thin;
+	border-top-style: solid;
+	border-top-color: #CCCCCC;
+}
+ 
+.preLoginAddress {
+	font-family: Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #666666;
+	border-top-width: thin;
+	border-left-width: thin;
+	border-top-style: solid;
+	border-left-style: dotted;
+	border-top-color: #CCCCCC;
+	border-left-color: #CCCCCC;
+}
+
+.preLoginAddressHeader {
+	font-family: Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #666666;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #CCCCCC;
+}
+
+
+.loginHistoryHeader {
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:13px; 
+	font-weight: bold;
+	padding:0px;
+}
+
+.loginHistoryResult {
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:13px; 
+	padding:0px;
+}
+
+
+.nabOptionLabel {
+	padding: 1px;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	text-align:center;
+	color:#333333;
+	vertical-align: top;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #CCCCCC;
+}
+
+.chainMapLabel {
+	padding: 1px;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	text-align:center;
+	color:#333333;
+	vertical-align: top;
+	
+}
+
+.chainMapSubLabel {
+	padding: 1px;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:13px;
+	font-weight:bold;
+	text-align:center;
+	color:#333333;
+	vertical-align: top;
+	
+}
+
+table.header {
+}
+th.header {
+}
+td.header {
+
+}
+
+
+
+
+.Intensity5 {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		vertical-align:top;
+		padding:1px;	
+		background-color:Red;
+}		
+
+.Intensity4 {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		vertical-align:top;
+		padding:1px;	
+		background-color:Pink;
+}
+
+.Intensity3 {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		vertical-align:top;
+		padding:1px;	
+		background-color:Orange;
+}
+
+.Intensity2 {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		vertical-align:top;
+		padding:1px;	
+		background-color:Yellow;
+}
+
+.Intensity1 {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		vertical-align:top;
+		padding:1px;	
+		background-color:Cyan;
+}
+.Intensity0 {
+		font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+		font-size:12px; 
+		vertical-align:top;
+		padding:1px;	
+		background-color:Blue;
+}
+
+
+.menuFormFont{
+	font-weight: bold;
+	font-family:Optima, Lucida, MgOpen Cosmetica, Lucida Sans Unicode, sans-serif;
+	font-size:12px; 
+}
+
+.helpLink{
+	text-decoration:none;
+	color:black;
+	font-size:14px;
+}
+
+ul.sortable li {
+	position: relative;
+}
+
+ul.boxy {
+	list-style-type: none;
+	padding: 4px 4px 0 4px;
+	margin: 0px;
+	width: 10em;
+	
+	
+}
+ul.boxy li {
+	cursor:move;
+	margin-bottom: 4px;
+	padding: 2px 2px;
+	border: 1px solid #ccc;
+	background-color: #eee;
+}
+
+#generalOptions {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	background-color: #1399FF;
+}
+
+#generalOptions h3 {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0px 0px 0px 2px;
+	margin: 0px;
+}
+
+#generalOptions form {
+	padding: 0px;
+	margin: 0px;
+}
+
+#generalOptions table {
+	display: inline-block;
+	width: 100%;
+}
+
+#generalOptions td {
+	font-size: 10px;
+	white-space: nowrap;
+	text-align: left;
+}
+
+#generalOptions input, #generalOptions select {
+	font-size:9px;
+}
+
+.invisible {
+	display: none;
+	
+}
+
+
+div.helpPopUp1{border-style:solid;border-width:1px;position:absolute;z-index:11;background-color:#FFFFCC;width:250px;}
+div.helpPopUp1 strong{display:none;}
+div.helpPopUp1 ul{margin:.5em 0;padding:0;list-style:none;}
+div.helpPopUp1 li{line-height:1.2em;}
+
+div.helpPopUp2{width:200px;border-style:solid;border-width:1px;position:absolute;z-index:11;background-color:#FFFFCC;width:250px;}
+div.helpPopUp2 strong{display:none;}
+div.helpPopUp2 ul{margin:.5em 0;padding:0;list-style:none;}
+div.helpPopUp2 li{line-height:1.2em;}
+
+div.shortcuts{
+	width:150px;
+	border-style:solid;
+	border-width:1px;
+	position:absolute;
+	z-index:10;
+	background-image: url(../img/fade-section-header.jpg);
+}
+div.shortcuts strong{display:none;}
+div.shortcuts ul{margin:.5em 0;padding:0;list-style:none;}
+div.shortcuts li{line-height:1.2em;}
+
+#footer { color:#CCCCCC; font-size: 8px;}

@@ -1,0 +1,145 @@
+<project name="menumine"  default="testEclipse"  basedir=".">
+
+
+
+ <target name="test">
+  	<junit printsummary="withOutAndErr" showoutput="true" timeout="480000">         
+  		
+  		<formatter type="xml"/>
+  		 <batchtest fork="yes" todir="testOut" >
+    		<fileset dir="../../">
+     			 <include name="**/*Test*.java"/>
+     			 <exclude name="**/*Tests.java"/>
+     			  <exclude name="**/*Segment*Tests.java"/>
+   			 </fileset>
+  		</batchtest>
+  		
+  		
+  		<classpath>
+  		<pathelement location="C:\java\eclipse3Data\menumine\" />
+  		 <fileset dir="lib">
+       		 <include name="**/*.jar"/>
+       		
+     </fileset>
+  		
+  		</classpath>
+  		
+	</junit>
+	
+	<junitreport todir="./reports">
+  		<fileset dir="./testOut">
+  		  <include name="TEST-*.xml"/>
+  		</fileset>
+  	<report format="frames" todir="./report/html"/>
+	</junitreport>
+	
+  </target>
+   
+ 
+  <target name="testEclipse">
+	   	<!-- cleanUp -->
+  		<delete dir="testOut" />
+  		<mkdir dir="testOut"/>
+  		<delete dir="report" />
+  		<mkdir dir="report"/>
+  		<delete dir="reports" />
+  		<mkdir dir="reports"/>
+
+  	<junit printsummary="withOutAndErr" showoutput="true" timeout="480000" dir="C:\java\eclipse3Data\menumine\WEB-INF" filtertrace="off">         
+  
+  		<formatter type="xml"/>
+  		<!--
+  			Note: you should delete the content
+  			of this directory prior to running the test.
+  			This helps avoid duplicate date.
+  		-->
+  		 <batchtest fork="yes" todir="testOut" >
+    		<fileset dir="src">
+     			 <include name="**/*Test*.java"/>
+     			 <exclude name="**/Abstract*Test*.java"/>
+     			 <exclude name="**/*Test*Factory*.java"/>
+     			 <exclude name="**/*Test*Initializer*.java"/>
+     			 <exclude name="**/*TestData*.java"/>
+     			 <exclude name="**/*TestDriver.java"/>
+     			 <exclude name="**/*Tests.java"/>
+     			 <exclude name="**/archive/*.java" />	
+   			 </fileset>
+  		</batchtest>
+  		
+  		
+  		<classpath>
+  		<pathelement location="C:\java\eclipse3Data\menumine\WEB-INF" />
+  		 <fileset dir="lib">
+       		 <include name="**/*.jar"/>
+       		 <include name="C:/java/eclipse3Data/menumine/WEB-INF" />
+    	</fileset>
+    	
+  		<pathelement path="C:/java/eclipse3Data/menumine/WEB-INF" />
+  		</classpath>
+  		
+	</junit>
+	
+	<junitreport todir="./reports">
+  		<fileset dir="./testOut">
+  		  <include name="TEST-*.xml"/>
+  		</fileset>
+  	<report format="frames" todir="./report/html"/>
+	</junitreport>
+	
+  </target>
+   
+
+
+  <target name="testSingleTest">
+	   		<!--
+  			cleanUp
+  		-->
+  		<delete dir="testOut" />
+  		<mkdir dir="testOut"/>
+  		<delete dir="report" />
+  		<mkdir dir="report"/>
+  		<delete dir="reports" />
+  		<mkdir dir="reports"/>
+
+  	<junit printsummary="withOutAndErr" showoutput="true" timeout="480000" dir="C:\java\eclipseData\menumine\" filtertrace="off">         
+  		
+
+  		
+  		<formatter type="xml"/>
+  		<!--
+  			Note: you should delete the content
+  			of this directory prior to running the test.
+  			This helps avoid duplicate date.
+  		-->
+  		 <batchtest fork="yes" todir="testOut" >
+    		<fileset dir="../../">
+     			 <include name="**/ViewAssignedTasksActionTest.java"/>
+
+     			
+   			 </fileset>
+  		</batchtest>
+  		
+  		
+  		<classpath>
+  		<pathelement location="C:\java\eclipse3Data\menumine\" />
+  		 <fileset dir="lib">
+       		 <include name="**/*.jar"/>
+       		 <include name="C:/java/eclipse3Data/menumine/menumine" />
+    	</fileset>
+    	
+  		<pathelement  path="C:/java/eclipse3Data/menumine/menumine" />
+  		</classpath>
+  		
+	</junit>
+	
+	<junitreport todir="./reports">
+  		<fileset dir="./testOut">
+  		  <include name="TEST-*.xml"/>
+  		</fileset>
+  	<report format="frames" todir="./report/html"/>
+	</junitreport>
+	
+  </target>
+	
+
+</project>

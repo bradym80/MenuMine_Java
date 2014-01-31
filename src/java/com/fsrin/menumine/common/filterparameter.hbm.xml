@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+
+
+
+  <class name="com.fsrin.menumine.common.FilterParameter" table="filterparameter" >
+    <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+       
+    		
+	<property name="fieldName" 
+		column="fieldName" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="empty" 
+		column="empty" 
+		type="java.lang.Boolean"  
+		not-null="false" 
+		unique="false" />    
+    
+    
+    <list name="andValues" table="andvalues" cascade="all" lazy="false" >
+     <key column="id"/>
+     <index column="posn"/>
+     <element column="name" type="string"/>
+    </list>
+    
+    <list name="orValues" table="orvalues" cascade="all" lazy="false">
+     <key column="id"/>
+     <index column="posn"/>
+     <element column="name" type="string"/>
+    </list>
+    
+    <list name="notValues" table="notvalues" cascade="all" lazy="false">
+     <key column="id"/>
+     <index column="posn"/>
+     <element column="name" type="string"/>
+    </list>
+    
+    <list name="inValues" table="invalues" cascade="all" lazy="false">
+     <key column="id"/>
+     <index column="posn"/>
+     <element column="name" type="string"/>
+    </list>
+    
+       
+  </class>
+  
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+
+
+
+  <class name="com.fsrin.menumine.core.menumine.chain.ChainFilterParameters" table="chainfilterparameters" >
+    <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+    	<set name="filterParameters" table="filterparameter" cascade="all" lazy="true">
+	       <key column="chainCollectionId"/>
+	        <one-to-many class="com.fsrin.menumine.common.FilterParameter"/>
+	    </set>
+       
+  </class>
+  
+</hibernate-mapping>

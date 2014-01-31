@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fstx.stdlib2.authen.users.User" table="user">
+    <id name="id" column="userId" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+	<property name="username" 
+		column="userUserName" 
+		type="string" 
+		length="20" 
+		not-null="true" 
+		unique="true" />
+		
+	<property name="password" 
+		column="userPassword" 
+		type="string" 
+		length="20" 
+		not-null="true" />
+		
+	<property name="email" 
+		column="userEmail" 
+		type="string" 
+		length="100" 
+		not-null="true" 
+		unique="true" />
+	
+	<property name="expirationDate" 
+		column="userExpirationDate" 
+		type="java.util.Date" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="inactive" 
+		column="userInactive" 
+		type="boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="roleName" 
+		column="userRole" 
+		type="string" 
+		length="20" 
+		not-null="true" 
+		unique="false" />
+
+	<property name="firstName" 
+		column="userFirstName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />		
+
+	<property name="lastName" 
+		column="userLastName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+			
+	<property name="comments" 
+		column="userComments" 
+		type="string" 
+		length="65536" 
+		not-null="false" 
+		unique="false" />		
+		
+	<property name="company" 
+		column="userCompany" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />				
+
+	<property name="street1" 
+		column="userStreet1" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />				
+
+	<property name="street2" 
+		column="userStreet2" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />				
+
+	<property name="city" 
+		column="userCity" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />				
+
+	<property name="state" 
+		column="userState" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />				
+
+	<property name="zip" 
+		column="userZip" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />				
+
+	<property name="phone" 
+		column="userPhone" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />				
+
+
+
+  </class>
+  
+ 
+  
+
+
+</hibernate-mapping>

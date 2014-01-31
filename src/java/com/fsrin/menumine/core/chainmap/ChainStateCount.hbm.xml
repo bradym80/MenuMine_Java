@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.fsrin.menumine.core.chainmap.ChainStateCount" table="tblstatelocation">
+		<id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+			<generator class="identity"/>
+        </id>
+
+        
+    <property name="chain" 
+		column="Chain" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+		
+		
+	<property name="MO"	column="MO"
+	 	type="java.lang.Long" not-null="false" unique="false" />	
+		
+		
+
+
+    <property name="IA"	column="IA"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="IL"	column="IL"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="IN"	column="IN"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="MI"	column="MI"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="MN"	column="MN"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="ND"	column="ND"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="NE"	column="NE"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="OH"	column="OH"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="OK"	column="OK" 
+    	type="java.lang.Long"
+    	 not-null="false"
+    	  unique="false" />
+
+    <property name="WI"	column="WI"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="SD"	column="SD"
+		type="java.lang.Long"
+		 not-null="false"
+		  unique="false" />
+
+    <property name="NH"	column="NH" 
+    	type="java.lang.Long"
+    	 not-null="false"
+    	  unique="false" />
+
+    <property name="ME"	column="ME"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="RI"	column="RI" 
+    	type="java.lang.Long"
+    	 not-null="false"
+    	  unique="false" />
+
+    <property name="DE"	column="DE"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="MA"	column="MA" 
+    	type="java.lang.Long"
+    	 not-null="false" 
+    	 unique="false" />
+
+    <property name="NJ"	column="NJ"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="CT"	column="CT" 
+    	type="java.lang.Long"
+    	 not-null="false" 
+    	 unique="false" />
+
+    <property name="NY"	column="NY"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="PA"	column="PA"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="DC"	column="DC"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="AR"	column="AR"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="GA"	column="GA"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="WV"	column="WV"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="AL"	column="AL"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="KS"	column="KS"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="KY"	column="KY"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="MS"	column="MS"
+     	type="java.lang.Long" 
+     	not-null="false" 
+     	unique="false" />
+
+    <property name="FL"	column="FL"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="NC"	column="NC"
+     	type="java.lang.Long" 
+     	not-null="false" 
+     	unique="false" />
+
+    <property name="SC"	column="SC" 
+    	type="java.lang.Long"
+    	 not-null="false"
+    	  unique="false" />
+
+    <property name="LA"	column="LA"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="TX"	column="TX"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="MD"	column="MD"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="VA"	column="VA"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="TN"	column="TN"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="WY"	column="WY"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="ID"	column="ID"
+     	type="java.lang.Long"
+		not-null="false" 
+		unique="false" />
+
+    <property name="MT"	column="MT" 
+    	type="java.lang.Long"
+    	 not-null="false"
+    	  unique="false" />
+
+    <property name="HI"	column="HI" 
+    	type="java.lang.Long"
+    	 not-null="false" 
+    	 unique="false" />
+
+    <property name="WA"	column="WA"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="UT"	column="UT"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="AK"	column="AK"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="NM"	column="NM"
+     	type="java.lang.Long"
+     	 not-null="false"
+     	  unique="false" />
+
+    <property name="NV"	column="NV"
+     	type="java.lang.Long" 
+     	not-null="false" 
+     	unique="false" />
+
+    <property name="CO"	column="CO"
+     	type="java.lang.Long" 
+     	not-null="false" 
+     	unique="false" />
+
+    <property name="CA"	column="CA"
+     	type="java.lang.Long"
+     	 not-null="false" 
+     	 unique="false" />
+
+    <property name="AZ"	column="AZ"
+     	type="java.lang.Long" 
+     	not-null="false"
+     	 unique="false" />
+
+    <property name="OR"	column="OR" 
+    	type="java.lang.Long"
+    	 not-null="false" 
+    	 unique="false" />
+    	 
+   <property name="VT"	column="VT" 
+    	type="java.lang.Long"
+    	 not-null="false" 
+    	 unique="false" />
+  
+    </class>
+  
+</hibernate-mapping>

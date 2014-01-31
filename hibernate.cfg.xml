@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">menumine</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/</property>
+        <property name="hibernate.connection.username">menumine</property>
+        <property name="hibernate.default_schema">menumine</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Use the C3P0 connection pool. -->
+        <property name="c3p0.min_size">3</property>
+        <property name="c3p0.max_size">5</property>
+        <property name="c3p0.timeout">1800</property>
+
+        <!-- Disable second-level cache. -->
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <property name="cache.use_query_cache">false</property>
+        <property name="cache.use_minimal_puts">false</property>
+        <property name="max_fetch_depth">3</property>
+
+        <!-- Print SQL to stdout. -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!-- Drop and then re-create schema on SessionFactory build, for testing. -->
+        <property name="hbm2ddl.auto">create</property>
+
+        <!-- Bind the getCurrentSession() method to the thread. -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Hibernate XML mapping files -->
+        <mapping resource="com/fstx/stdlib2/authen/loginhistory.hbm.xml"/>
+        <mapping resource="com/fstx/stdlib2/authen/users/user.hbm.xml"/>
+        <mapping resource="com/fsrin/menumine/users/userpreference.hbm.xml"/>
+        <mapping resource="com/fstx/stdlib2/authen/users/usergroup.hbm.xml"/>
+        <mapping resource="com/fstx/stdlib2/authen/users/groupright.hbm.xml"/>
+        <mapping resource="com/fstx/stdlib2/authen/users/groupmembership.hbm.xml"/>
+        <mapping resource="com/fsrin/menumine/common/filterparameter.hbm.xml"/>
+        <mapping resource="com/fsrin/menumine/core/menumine/chain/chainfilterparameters.hbm.xml"/>
+        <mapping resource="com/fsrin/menumine/core/menumine/savedquery/savedquery.hbm.xml"/>
+        <mapping resource="com/fsrin/menumine/core/menumine/fieldstodisplaybean.hbm.xml"/>
+        <mapping resource="com/fsrin/menumine/core/menumine/masterfoodfilterparameters.hbm.xml"/>
+        <mapping resource="com/fsrin/menumine/core/menumine/rollup/RollUpElement.hbm.xml"/>
+        <mapping resource="com/fsrin/menumine/core/menumine/rollup/RollUpOptions.hbm.xml"/>
+        <mapping resource="com/fsrin/menumine/core/menumine/tblchain.hbm.xml"/>
+
+        <!-- Hibernate Annotations (and package-info.java)
+        <mapping package="org.mypackage"/>
+        <mapping class="org.MyClass/>
+        -->
+    </session-factory>
+</hibernate-configuration>

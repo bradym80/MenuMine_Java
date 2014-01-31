@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.fsrin.menumine.core.chainstat.ChainStat" table="tblchain">
+		<id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+			<generator class="identity"/>
+        </id>
+
+        
+        
+    <many-to-one name="chainStateCount" 
+    	insert="false" update="false" 
+    	class="com.fsrin.menumine.core.chainmap.ChainStateCount"  
+    	column="Chain" property-ref="chain"/>
+     
+        
+    <property name="operationName" 
+		column="Chain" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+    <property name="hqAddress" 
+		column="HQAddress" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />        
+        
+    <property name="hqCity" 
+		column="HQCity" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" /> 	
+		
+    <property name="hqState" 
+		column="HQState" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" /> 
+		
+	<property name="hqZip" 
+		column="HQZip" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" /> 
+        
+	<property name="phone" 
+		column="Phone" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />    
+
+	<property name="fax" 
+		column="Fax" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />  
+		
+	<property name="webSite" 
+		column="WebSite" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />  
+
+	<property name="units2003" 
+		column="Units2003" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />  
+
+	<property name="units2004" 
+		column="Units2004" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="units2007" 
+		column="Units2007" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />  
+
+	<property name="units2008" 
+		column="Units2008" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="sales2003" 
+		column="Sales2003" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+ 
+	<property name="sales2004" 
+		column="Sales2004" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="sales2007" 
+		column="Sales2007" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+ 
+	<property name="sales2008" 
+		column="Sales2008" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+
+	 
+	<property name="indusRankDoll04" 
+		column="[IndusRankDoll-04]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="indusRankDoll03" 
+		column="[IndusRankDoll-03]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="indusRankDoll07" 
+		column="[IndusRankDoll-07]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="indusRankDoll08" 
+		column="[IndusRankDoll-08]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+
+	<property name="indusRankUnits04" 
+		column="[IndusRankUnits-04]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="indusRankUnits03" 
+		column="[IndusRankUnits-03]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="indusRankUnits07" 
+		column="[IndusRankUnits-07]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="indusRankUnits08" 
+		column="[IndusRankUnits-08]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="segRankDoll04" 
+	    column="[SegRankDoll-04]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="segRankDoll03" 
+	    column="[SegRankDoll-03]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="segRankDoll07" 
+	    column="[SegRankDoll-07]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="segRankDoll08" 
+	    column="[SegRankDoll-08]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="segRankUnits04" 
+	    column="[SegRankUnits-04]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+	
+	<property name="segRankUnits03" 
+	    column="[SegRankUnits-03]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="segRankUnits07" 
+	    column="[SegRankUnits-07]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+	
+	<property name="segRankUnits08" 
+	    column="[SegRankUnits-08]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="parentCo" 
+	    column="ParentCo" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="parentAddress" 
+	    column="ParentAddress" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="parentState" 
+	    column="ParentState" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="parentCity" 
+	    column="ParentCity" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	
+	<property name="parentZip" 
+	    column="ParentZip" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="segment" 
+	    column="Segment" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="sectorName" 
+	    column="SectorName" 
+		type="string" 
+		length="50" 	
+		not-null="false" 
+		unique="false" />
+		
+		
+	<property name="hqRegion" 
+		column="HQRegion" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="operatorType" 
+		column="OperatorType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="countryLoc" 
+		column="CountryLoc" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	  
+	<property name="yearPutInDatabase" 
+		column="FirstYearInDatabase" 
+		type="java.lang.Integer" 
+		not-null="false" 
+		unique="false" />
+
+
+  
+    </class>
+  
+</hibernate-mapping>

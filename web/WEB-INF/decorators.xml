@@ -1,0 +1,57 @@
+<decorators>
+
+<!-- reid 2006-08-12 reid@fivesticks.com vestigal.
+	<decorator name="menumineAJAX" page="/WEB-INF/decorators/decoratorAJAX.jsp">
+		<pattern>*AJAX*.action</pattern>
+	</decorator> -->
+
+	<decorator name="menuminedecorator" page="/WEB-INF/decorators/menumineDecorator.jsp">
+		<pattern>*menumine*.action</pattern>
+	</decorator>
+	
+	<decorator name="printabledecorator" page="/WEB-INF/decorators/printableDecorator.jsp">
+		<pattern>*printable*.action</pattern>
+	</decorator>	
+	
+	<decorator name="menuminedecorator" page="/WEB-INF/decorators/menumineDecorator.jsp">
+		<pattern>*dessertmine*.action</pattern>
+	</decorator>
+	
+	
+	<decorator name="ingredientminedecorator" page="/WEB-INF/decorators/menumineDecorator.jsp">
+		<pattern>*ingredientmine*.action</pattern>
+	</decorator>
+	
+		<decorator name="beverageminedecorator" page="/WEB-INF/decorators/menumineDecorator.jsp">
+		<pattern>*beveragemine*.action</pattern>
+	</decorator>
+	
+		<decorator name="breakfastminedecorator" page="/WEB-INF/decorators/menumineDecorator.jsp">
+		<pattern>*breakfastmine*.action</pattern>
+	</decorator>
+	
+
+	<decorator name="canneddecorator" page="/WEB-INF/decorators/menumineDecorator.jsp">
+		<pattern>*CannedSchematic*.action</pattern>
+	</decorator>
+	
+	<decorator name="menuminedecorator" page="/WEB-INF/decorators/menumineDecorator.jsp">
+		<pattern>*RollUp*.action</pattern>
+	</decorator>	
+	
+	<decorator name="analogdecorator" page="/WEB-INF/decorators/analogDecorator.jsp">
+		<pattern>*analog*.action</pattern>
+	</decorator>
+	
+	<decorator name="menuminedecorator" page="/WEB-INF/decorators/menumineDecorator.jsp">
+		<pattern>*Profiler*.action</pattern>
+	</decorator>	
+	
+	<decorator name="mydecorator" page="/WEB-INF/decorators/decorator.jsp">
+		<pattern>*.action</pattern>
+	</decorator>
+
+	
+
+	
+</decorators>

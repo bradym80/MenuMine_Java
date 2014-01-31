@@ -1,0 +1,224 @@
+<project name="menumine" default="localPackage" basedir=".">
+	<!--05-21-08 MJB This file is used to build a WAR of the menumine project for use on an application server. 
+	To create a war for deployment,	review the paths in the target, 'distwar' located in this file. make sure that spring.properties is
+	populated with the correct information. A file named menumine.war will deploy to the 'dist' directory in this eclipse project.
+	If you would like to create a profile specifically for yourself, recreate the properties below. If you are a developer, I suggest
+	simply copying and pasting all property names with the word developer in them and replacing the word developer with a number or your
+	name. After doing this, change the paths to reflect your machine's settings. copy and past distwar_developer and assign it a unique name.
+	Change the paths in your distwar target to match your settings. In the outline, right click on your distwar target and select 
+	"run as ant build" The menumine war should now replace the existing war in the web apps directory.-->
+	
+	<property name="src" location="src/java" />
+	<property name="src-non-java" location="src/non-java" />
+	<property name="src-test" location="src/java-test" />
+	<property name="src-java-util" location="src/java-util" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<property name="reports.test" location="test/reports-test" />
+	<property name="builddatabase" location="src/java-util" />
+	<property name="reports" location="test/reports-test-html" />
+	<property name="reports.html" location="test/reports-test-html" />
+
+
+    <property name="tomcat.home" location="/Library/Tomcat" />
+	<property name="tomcat.start" location="${tomcat.home}/bin/startup.sh" />
+	<property name="tomcat.webapp" location="${tomcat.home}/webapps" />
+	<property name="tomcat.webapp.war" location="${tomcat.webapp}/menumine.war" />
+
+	<tstamp />
+
+	<path id="classpath">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="init">
+
+		<delete dir="${build}" />
+		<delete dir="${reports.test}" />
+		<delete dir="${reports}"/>
+		<delete dir="${reports.html}"/>
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${reports.test}" />
+		<mkdir dir="${reports}" />
+		<mkdir dir="${reports.html}" />
+		
+		
+		
+		
+	</target>
+
+	<target name="build.plain" depends="init">
+		<javac srcdir="${src}" 
+			destdir="${build}" 
+			classpathref="classpath" 
+			debug="false" 
+			debuglevel="lines,vars,source"  />
+	</target>
+		
+	<target name="build" depends="init">
+		<javac srcdir="${src}" 
+			destdir="${build}" 
+			classpathref="classpath" 
+			debug="true" 
+			debuglevel="lines,vars,source" />
+	</target>
+
+	<target name="tests" depends="build">
+		<junit printsummary="yes" haltonfailure="no" fork="yes" maxmemory="64m">
+			<classpath>
+				<fileset dir="lib">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${src}" />
+				<pathelement location="${src-test}" />
+				<pathelement location="${src-non-java}" />
+				<pathelement location="${build}" />
+			</classpath>
+			<formatter type="xml" />
+			<batchtest  todir="${reports.test}">
+				<fileset dir="${src}">
+					<include name="**/*Test*.java" />
+					<exclude name="**/AbstractNonInitializingMenuMineTestCase.java" />
+					<exclude name="**/AbstractFilterTest.java" />					
+					<exclude name="**/TestSettings.java" />					
+					<exclude name="**/*TestFactory.java" />
+					<exclude name="**/AllTests.java" />
+					<exclude name="**/*TestData*.java" />
+					<exclude name="**/TestMatrix*.java" />
+					<exclude name="**/*TestSupport*.java" />					
+					<exclude name="**/*Test_Legacy*.java" />
+
+				</fileset>
+			</batchtest>
+			
+	
+		</junit>
+		
+		<junitreport todir="${reports}">
+		  		<fileset dir="${reports.test}">
+		  		  <include name="TEST-*.xml"/>
+		  		</fileset>
+		  	<report format="frames" todir="${reports.html}"/>
+		</junitreport>
+	</target>
+
+	<target name="distwar" depends="build">
+
+			<copy todir="${build}">
+				<fileset dir="${src}">
+					<include name="**/*.hbm.xml" />
+					<include name="**/*.properties" />
+				</fileset>
+			</copy>
+
+			<copy todir="${build}">
+				<fileset dir="src/non-java" />
+			</copy>
+			
+
+			<delete file="${dist}/menumine.war" />
+			<war basedir="web/ui" destfile="${dist}/menumine.war" webxml="web/conf/web.xml">
+
+				<classes dir="${build}" />
+
+				<webinf dir="web/WEB-INF" />
+
+				<lib dir="lib/dist" />
+
+			</war>
+		</target>
+
+
+
+	<target name="localPackage" depends="localClean,build">
+
+		<copy todir="${build}">
+			<fileset dir="${src}">
+				<include name="**/*.hbm.xml" />
+				<include name="**/*.properties" />
+				
+			</fileset>
+		</copy>
+
+		<copy todir="${build}">
+			<fileset dir="src/non-java" />
+		</copy>
+
+		<!--comment this one if you uncommented the one above. -->
+		<copy file="web/ui/css/menumine.v2.menumine.css" 
+					tofile="web/ui/css/menumine.v2.css" overwrite="true" />
+
+		<copy file="web/ui/css/menumine.menumine.css" 
+					tofile="web/ui/css/menumine.css" overwrite="true" />
+
+		<echo message="Deploying the Web app...." />
+		<war basedir="web/ui" destfile="${tomcat.webapp.war}" webxml="web/conf/web.xml">
+			<classes dir="${build}" />
+			<webinf dir="web/WEB-INF" />
+			<lib dir="lib/dist" />
+		</war>
+	</target>
+
+	<target name="localStart">
+		<exec executable="${tomcat.start}" />
+	</target>
+
+	<target name="localClean">
+		<delete dir="${tomcat.webapp}/menumine" />
+		<delete dir="${tomcat.home}/work/Catalina" />
+		<delete file="${tomcat.webapp.war}" />
+	</target>
+	
+		
+	<target name="localDeploy" depends="localClean,localPackage, localStart">
+	
+	</target>
+	<!--<target name="databasebuild">
+		<sql
+		    driver="org.database.jdbcDriver"
+		    url="jdbc:database-url"
+		    userid="sa"
+		    password="pass"
+		    src="data.sql"
+		/>
+		<junit printsummary="yes" haltonfailure="no" fork="yes" maxmemory="64m">
+					<classpath>
+						<fileset dir="lib">
+							<include name="**/*.jar" />
+						</fileset>
+						<pathelement location="${src}" />
+						<pathelement location="${src-non-java}" />
+					</classpath>
+					<formatter type="xml" />
+					<batchtest todir="${builddatabase}">
+						<fileset dir="${src}">
+							<include name="**/*Test*.java" />
+							<exclude name="**/AbstractNonInitializingMenuMineTestCase.java" />
+							<exclude name="**/AbstractFilterTest.java" />					
+							<exclude name="**/TestSettings.java" />					
+							<exclude name="**/*TestFactory.java" />
+							<exclude name="**/AllTests.java" />
+							<exclude name="**/*TestData*.java" />
+							<exclude name="**/TestMatrix*.java" />
+							<exclude name="**/*TestSupport*.java" />					
+							<exclude name="**/*Test_Legacy*.java" />
+
+						</fileset>
+					</batchtest>
+					
+			
+				</junit>
+				
+				<junitreport todir="${reports}">
+				  		<fileset dir="${reports.test}">
+				  		  <include name="TEST-*.xml"/>
+				  		</fileset>
+				  	<report format="frames" todir="${reports.html}"/>
+				</junitreport>
+	</target>-->
+		
+
+</project>

@@ -1,0 +1,6 @@
+<clickstream>
+    <!-- there can only be one logger -->
+    <logger class="com.opensymphony.clickstream.logger.EmailClickstreamLogger"/>
+
+
+</clickstream>

@@ -1,0 +1,79 @@
+<components>
+
+	<component>
+		<scope>session</scope>
+		<class>com.fsrin.menumine.context.webwork.MenuMineSessionContextWrapper</class>
+		<enabler>com.fsrin.menumine.context.webwork.MenuMineSessionContextWrapperAware</enabler>
+	</component>
+
+	<component>
+		<scope>session</scope>
+		<class>com.fsrin.menumine.core.menumine.natlaccountbench.xwork.NationalAccountBenchmarkWebOptions</class>
+		<enabler>com.fsrin.menumine.core.menumine.natlaccountbench.xwork.NationalAccountBenchmarkWebOptionsAware</enabler>
+	</component>
+	
+	<!-- 2006-02-02 RSC
+	<component>
+		<scope>session</scope>
+		<class>com.fsrin.menumine.core.menumine.natlaccountbench.cannedschematic.xwork.CannedSchematicModifyContext</class>
+		<enabler>com.fsrin.menumine.core.menumine.natlaccountbench.cannedschematic.xwork.CannedSchematicModifyContextAware</enabler>
+	</component>
+	-->
+
+	<component>
+		<scope>session</scope>
+		<class>com.fsrin.menumine.core.menumine.marketsize.xwork.MarketSizeProjectorContext</class>
+		<enabler>com.fsrin.menumine.core.menumine.marketsize.xwork.MarketSizeProjectorContextAware</enabler>
+	</component>
+
+	<component>
+		<scope>session</scope>
+		<class>com.fsrin.menumine.core.incidence.trend.xwork.IncidenceTrendContext</class>
+		<enabler>com.fsrin.menumine.core.incidence.trend.xwork.IncidenceTrendContextAware</enabler>
+	</component>
+	
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fsrin.menumine.core.chainmap.xwork.ChainMapContext</class>
+		<enabler>com.fsrin.menumine.core.chainmap.xwork.ChainMapContextAware</enabler>
+	</component>
+
+	<component>
+		<scope>session</scope>
+		<class>com.fsrin.menumine.core.chainmap.xwork.ChainMapWebOptions</class>
+		<enabler>com.fsrin.menumine.core.chainmap.xwork.ChainMapWebOptionsAware</enabler>
+	</component>
+
+	<component>
+		<scope>session</scope>
+		<class>com.fsrin.menumine.core.menumine.savedquery.xwork.SavedQueryModifyContext</class>
+		<enabler>com.fsrin.menumine.core.menumine.savedquery.xwork.SavedQueryModifyContextAware</enabler>
+	</component>	
+
+	<component>
+		<scope>session</scope>
+		<class>com.fstx.stdlib2.authen.webwork.UserModifyContext</class>
+		<enabler>com.fstx.stdlib2.authen.webwork.UserModifyContextAware</enabler>
+	</component>	
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fstx.stdlib2.authen.webwork.UserListContext</class>
+		<enabler>com.fstx.stdlib2.authen.webwork.UserListContextAware</enabler>
+	</component>	
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fsrin.menumine.core.profiler.xwork.ProfileContext</class>
+		<enabler>com.fsrin.menumine.core.profiler.xwork.ProfileContextAware</enabler>
+	</component>		
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fsrin.menumine.core.flavortrak.xwork.FlavorTrakContext</class>
+		<enabler>com.fsrin.menumine.core.flavortrak.xwork.FlavorTrakContextAware</enabler>
+	</component>		
+			
+		
+</components>

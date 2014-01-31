@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+
+
+
+  <class name="com.fsrin.menumine.core.menumine.natlaccountbench.cannedschematic.CannedSchematicImpl" table="cannedschematic" >
+    <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+       
+    		
+	<property name="name" 
+		column="name" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="mineType" 
+		column="mineType" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="userName" 
+		column="userName" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="groupName" 
+		column="groupName" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="includeBenchmark" 
+		column="includeBenchmark" 
+		type="boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="includeBenchmarkTrend" 
+		column="includeBenchmarkTrend" 
+		type="boolean" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="includeBenchmarkGraph" 
+		column="includeBenchmarkGraph" 
+		type="boolean" 
+		not-null="false" 
+		unique="false" />	
+		
+		 
+    <list name="fieldKeys" table="cannedschematicfields" cascade="all">
+     <key column="id"/>
+     <index column="posn"/>
+     <element column="name" type="string"/>
+    </list>
+    
+       
+  </class>
+  
+</hibernate-mapping>

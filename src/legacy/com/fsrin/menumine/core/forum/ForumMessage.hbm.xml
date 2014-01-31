@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fsrin.menumine.core.forum.ForumMessage" table="forummessage">
+    <id name="id" column="ID" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+    <property name="user" 
+		column="user" 
+		type="string" 
+		length="20" 
+		not-null="true" 
+		unique="false" />
+
+  <property name="group" 
+		column="usergroup" 
+		type="string" 
+		length="20" 
+		not-null="false" 
+		unique="false" />
+  
+		
+	<property name="message" 
+		column="message" 
+		type="string" 
+		length="65536" 
+		not-null="true" 
+		unique="false" />    
+
+	<property name="topic" 
+		column="topic" 
+		type="string" 
+		length="100" 
+		not-null="true" 
+		unique="false" />
+
+		<!-- This is either Public, Private, or Chef -->
+	<property name="forumGroup" 
+		column="forumGroup" 
+		type="string" 
+		length="100" 
+		not-null="true" 
+		unique="false" />
+    
+
+	<property name="date"
+		column="date"
+		type="java.util.Date"
+		not-null="true"
+		unique="false" /> 
+
+
+   
+		
+	
+		
+	
+	
+</class>
+  
+ 
+  
+
+
+</hibernate-mapping>

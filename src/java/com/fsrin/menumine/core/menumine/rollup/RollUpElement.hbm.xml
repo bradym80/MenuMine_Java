@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fsrin.menumine.core.menumine.rollup.RollUpElement" table="rollupelement" >
+    <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+    <property name="term" 
+		column="term" 
+		type="string" 
+		length="255" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="label" 
+		column="label" 
+		type="string" 
+		length="255" 
+		not-null="false" 
+		unique="false" />	
+    		
+	
+	
+       
+  </class>
+  
+</hibernate-mapping>

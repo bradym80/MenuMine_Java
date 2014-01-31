@@ -1,0 +1,1277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN" "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+
+<!--
+	History: MenuMine xwork.xml
+	2005-1-13 Initiated.  menuMineExpressAction
+	
+	Note that many of the class names simply refer to spring beans.  
+-->
+
+
+<xwork>
+  <include file="webwork-default.xml" />
+  <package name="default" extends="webwork-default">
+    <result-types>
+      <result-type name="chart" class="com.fsrin.menumine.common.jfreechart.ChartResult" default="false" />
+      <result-type name="excel" class="com.fsrin.menumine.common.poi.ExcelResult" default="false" />
+   	  <result-type name="image" class="com.fsrin.menumine.common.image.ImageResult" default="false" />
+    </result-types>
+    <interceptors>
+      <interceptor name="errorInterceptor" class="com.fsrin.menumine.common.webwork.ErrorInterceptor" />
+      <interceptor name="sessionValidator" class="com.fsrin.menumine.common.webwork.SessionValidatorInterceptor" />
+      <interceptor name="adminInterceptor" class="com.fsrin.menumine.authorization.xwork.AdminInterceptor" />
+      <!-- 2006-04-04 RSC Disabled.
+      <interceptor name="dessertMineAuthorizerInterceptor" class="dessertMineAuthorizerInterceptor" />
+      <interceptor name="ingredientMineAuthorizerInterceptor" class="ingredientMineAuthorizerInterceptor" />
+   <interceptor name="beverageMineAuthorizerInterceptor" class="beverageMineAuthorizerInterceptor" />
+   <interceptor name="breakfastMineAuthorizerInterceptor" class="breakfastMineAuthorizerInterceptor" />
+      <interceptor name="menuMineAuthorizerInterceptor" class="menuMineAuthorizerInterceptor" />
+      <interceptor name="nationalAccountBenchmarkAuthorizerInterceptor" class="nationalAccountBenchmarkAuthorizerInterceptor" />
+		-->
+
+      
+     <interceptor name="persisterInterceptor" class="com.fsrin.menumine.common.crud.xwork.interceptors.PersisterInterceptor" />
+     <interceptor name="hydratorInterceptor" class="com.fsrin.menumine.common.crud.xwork.interceptors.HydratorInterceptor" />
+      <interceptor name="listHydratorInterceptor" class="com.fsrin.menumine.common.crud.xwork.interceptors.ListHydratorInterceptor" />
+     
+     
+     
+     <interceptor name="authorizationBeanInterceptor" class="authorizationBeanInterceptor" />
+     
+     
+      <interceptor name="execAndWait" class="com.opensymphony.webwork.interceptor.ExecuteAndWaitInterceptor" />
+      <interceptor-stack name="defaultStackLogin">
+        <interceptor-ref name="static-params" />
+        <interceptor-ref name="params" />
+        <interceptor-ref name="conversionError" />
+        <interceptor-ref name="component" />
+      </interceptor-stack>
+      
+      <interceptor-stack name="defaultStack2">
+        <interceptor-ref name="component" />
+        <interceptor-ref name="static-params" />
+        <interceptor-ref name="params" />
+        <interceptor-ref name="conversionError" />
+        <interceptor-ref name="errorInterceptor" />
+        <interceptor-ref name="sessionValidator" />
+        
+        <!-- 2006-02-09 RSC
+        <interceptor-ref name="hydratorInterceptor" />
+        <interceptor-ref name="persisterInterceptor" />
+        <interceptor-ref name="listHydratorInterceptor" />
+		-->        
+
+		<interceptor-ref name="timer"/>
+        <interceptor-ref name="authorizationBeanInterceptor" />
+      </interceptor-stack>
+	  
+	  <interceptor-stack name="defaultStack3">
+        <interceptor-ref name="component" />
+        <interceptor-ref name="static-params" />
+        <interceptor-ref name="params" />
+        <interceptor-ref name="conversionError" />
+        <interceptor-ref name="errorInterceptor" />
+		<interceptor-ref name="timer"/>
+        <interceptor-ref name="authorizationBeanInterceptor" />
+      </interceptor-stack>
+    
+      <interceptor-stack name="menuMineExecuteAndWaitStack">
+        <interceptor-ref name="defaultStack2" />
+        <!--   <interceptor-ref name="execAndWait"/> -->
+      </interceptor-stack>
+    </interceptors>
+    <global-results>
+      <result name="global-login" type="chain">
+        <param name="actionName">login</param>
+      </result>
+      <result name="access-error" type="chain">
+        <param name="actionName">error</param>
+      </result>
+      <result name="global-error" type="chain">
+        <param name="actionName">error</param>
+      </result>
+      <result name="global-common-delete" type="chain">
+        <param name="actionName">commonDelete</param>
+      </result>
+      <result name="global-delete-user-success" type="chain">
+        <param name="actionName">userList</param>
+      </result>
+    </global-results>
+    
+    <action name="viewGraph" class="wwViewGraph">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chart">
+        <param name="width">800</param>
+        <param name="height">600</param>
+      </result>
+    </action>
+    
+    <action name="viewExcel" class="wwViewExcel">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+      <result name="input" type="dispatcher">menumine.action</result>
+    </action>
+    <action name="statisticalTableExcel" class="menuMineDisplayStatisticalTableAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">statisticalTableExcelPart2</result>
+    </action>
+    <action name="statisticalTableExcelPart2" class="wwStatisticalTableExcel">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>
+    
+    
+    
+    <action name="crossTabExcel" class="menuMineDisplayCrossTabulationAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">crossTabExcelPart2</result>
+    </action>
+    <action name="crossTabExcelPart2" class="wwCrossTabExcel">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>
+    <action name="categoryIncidenceExcel" class="menuMineDisplayCategoryIncidenceAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">categoryIncidenceExcelPart2</result>
+    </action>
+    <action name="categoryIncidenceExcelPart2" class="wwCategoryIncidenceExcel">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>
+    <action name="itemsPerChainMenuingExcel" class="menuMineDisplayItemsPerChainMenuingAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">itemsPerChainMenuingExcelPart2</result>
+    </action>
+    <action name="itemsPerChainMenuingExcelPart2" class="wwItemsPerChainMenuingExcel">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>
+    <action name="meanTrendExcel" class="menuMineDisplayMeanPriceTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">meanTrendExcelPart2</result>
+    </action>
+    <action name="meanTrendExcelPart2" class="wwMeanTrendExcel">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>
+    <action name="medianTrendExcel" class="menuMineDisplayMedianPriceTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">medianTrendExcelPart2</result>
+    </action>
+    <action name="medianTrendExcelPart2" class="wwMedianTrendExcel">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>
+    <action name="viewMedianPriceTrendLineGraph" class="menuMineDisplayMedianPriceTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">viewMedianPriceTrendLineGraphPart2</result>
+    </action>
+    <action name="viewMedianPriceTrendLineGraphPart2" class="wwViewMedianPriceTrendLineGraphAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chart">
+        <param name="width">800</param>
+        <param name="height">600</param>
+      </result>
+    </action>
+    <action name="viewMeanPriceTrendLineGraph" class="menuMineDisplayMeanPriceTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">viewMeanPriceTrendLineGraphPart2</result>
+    </action>
+    <action name="viewMeanPriceTrendLineGraphPart2" class="wwViewMeanPriceTrendLineGraphAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chart">
+        <param name="width">800</param>
+        <param name="height">600</param>
+      </result>
+    </action>
+    <action name="login" class="flareProviderAction">
+      <interceptor-ref name="defaultStackLogin" />
+      <result name="success" type="chain">loginPart2</result>
+	  <result name="error" type="dispatcher">/WEB-INF/jsp/menumine/sitedown.jsp</result>
+    </action>
+    <action name="loginPart2" class="webLoginAction">
+      <interceptor-ref name="defaultStackLogin" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/auth/login.jsp</result>
+      <result name="admin" type="dispatcher">dashboard.action</result>
+      <result name="success" type="dispatcher">dashboard.action</result>
+    </action>
+    <action name="logout" class="wwLogoutAction">
+      <interceptor-ref name="defaultStackLogin" />
+      <result name="success" type="dispatcher">login.action</result>
+    </action>
+    <action name="error" class="com.opensymphony.xwork.ActionSupport">
+      <interceptor-ref name="defaultStackLogin" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/error/globalError.jsp</result>
+    </action>
+    
+    <!-- 2006-01-31 RSC Dead
+    <action name="efoodletterRss" class="efoodletterRssAction">
+      <interceptor-ref name="defaultStack2" />
+    </action>
+    -->
+    
+    
+    <!-- ADMINISTRATION -->
+    <action name="administrationMenu" class="com.fsrin.menumine.common.webwork.menu.AdminMenuAction">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="success.old" type="dispatcher">/WEB-INF/jsp/auth/administrationMenu.jsp</result>
+      <result name="success" type="chain">userList</result>
+    </action>
+    <action name="userList" class="wwUserList">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/auth/userListv1.jsp</result>
+    </action>
+	
+	<action name="databaseUpdate" class="com.fsrin.menumine.common.webwork.DatabaseUpdateDate">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/auth/database.jsp</result>
+    </action>
+
+	<action name="userModify" class="wwUserModify" >
+		<interceptor-ref name="defaultStack2" />
+		<interceptor-ref name="adminInterceptor" />
+		<result name="input" type="dispatcher">/WEB-INF/jsp/auth/userModify.jsp</result>
+		<result name="success" type="dispatcher">/userList.action</result>
+	</action>
+    <action name="userModifyFromList" class="wwUserModifyFromList">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/auth/userList.jsp</result>
+      <result name="success" type="dispatcher">/userList.action</result>
+    </action>
+    <action name="userModifyPassword" class="wwUserModifyPassword">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/auth/userModifyPassword.jsp</result>
+      <result name="success" type="dispatcher">/userList.action</result>
+    </action>
+    <action name="userGroupModify" class="wwUserGroupModify">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/auth/userGroupModify.jsp</result>
+      <result name="success" type="dispatcher">/userGroupList.action</result>
+    </action>
+    <action name="userGroupMembership" class="wwUserGroupMembership">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/auth/userGroupMembership.jsp</result>
+      <result name="success" type="dispatcher">/userGroupMembership.action</result>
+    </action>
+    <action name="userGroupRights" class="wwUserGroupRights">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/auth/userGroupRights.jsp</result>
+      <result name="success" type="dispatcher">/userGroupRights.action</result>
+    </action>
+    <action name="addRightToGroup" class="wwAddRightToGroup">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="success" type="dispatcher">/userGroupRights.action</result>
+    </action>
+    <action name="removeRightFromGroup" class="wwRemoveRightFromGroup">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="success" type="dispatcher">/userGroupRights.action</result>
+    </action>
+    <action name="addToGroup" class="wwAddToGroup">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="success" type="dispatcher">/userGroupMembership.action</result>
+    </action>
+    <action name="removeFromGroup" class="wwRemoveFromGroup">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="success" type="dispatcher">/userGroupMembership.action</result>
+    </action>
+    <action name="userGroupList" class="wwUserGroupList">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/auth/userGroupList.jsp</result>
+    </action>
+    <action name="passwordHelp" class="wwPasswordHelp">
+      <interceptor-ref name="defaultStackLogin" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/password/wwPasswordHelpInput.jsp</result>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/password/wwPasswordHelpSuccess.jsp</result>
+    </action>
+    
+    
+    
+    <action name="hssfFileList" class="com.fsrin.menumine.admin.xwork.ShowSavedHssfFilesAction">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="adminInterceptor" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/admin/hssfFileList.jsp</result>
+    </action>
+        
+    <!-- 2006-04-04  was disabled. -->
+	<action name="commonDelete" class="wwCommonDelete">
+			<interceptor-ref name="defaultStack2" />
+			<result name="error" type="dispatcher">/WEB-INF/jsp/common/wwDeleteError.jsp</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/common/wwDeleteInput.jsp</result>
+			<result name="groups" type="dispatcher">userGroupList.action</result>
+			<result name="success.users" type="dispatcher">userList.action</result>
+			
+	</action>
+
+		
+	<!-- 2006-01-31 RSC Not using the forum activitiy. 
+    <action name="dashboard" class="recentForumActivityAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">dashboardPart2</result>
+    </action>
+    -->
+    
+    <!-- 2006-01-31 changed name
+    <action name="dashboardPart2" class="dashboard">
+    -->
+    <action name="dashboard" class="dashboard">    
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/dashboards/development.jsp</result>
+    </action>
+    
+    <action name="getCategoryTemplates"  class="com.fsrin.menumine.context.webwork.GetCategoryTemplatesAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+    </action>
+
+    <action name="getItemBrags"  class="com.fsrin.menumine.context.webwork.GetDashboardBragItemsAction">
+      <interceptor-ref name="defaultStack3" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+    </action>
+        
+    
+    
+    <action name="dessertmine" class="dessertMineAction">
+      <interceptor-ref name="defaultStack2" />
+      <!--<interceptor-ref name="dessertMineAuthorizerInterceptor" />-->
+      <result name="success" type="chain">menumine</result>
+    </action>
+    
+    <action name="ingredientmine" class="ingredientMineAction">
+      <interceptor-ref name="defaultStack2" />
+      <!--<interceptor-ref name="ingredientMineAuthorizerInterceptor" />-->
+      <result name="success" type="chain">menumine</result>
+    </action>
+    
+     <action name="beveragemine" class="changeMineAction">
+      <interceptor-ref name="defaultStack2" />
+      <!--<interceptor-ref name="beverageMineAuthorizerInterceptor" />-->
+       <param name="key">beverage.mine</param>
+      <result name="success" type="chain">menumine</result>
+    </action>
+    
+     <action name="breakfastmine" class="changeMineAction">
+      <interceptor-ref name="defaultStack2" />
+      <!--<interceptor-ref name="breakfastMineAuthorizerInterceptor" />-->
+       <param name="key">breakfast.mine</param>
+      <result name="success" type="chain">menumine</result>
+    </action>
+    
+
+    <action name="usemenumine" class="useMenuMineAction">
+      <interceptor-ref name="defaultStack2" />
+      <!--<interceptor-ref name="menuMineAuthorizerInterceptor" />-->
+      <result name="success" type="chain">menumine</result>
+    </action>
+
+	<action name="reset" class="resetAction" >
+			<interceptor-ref name="defaultStack2" />	
+			<result name="success" type="chain">menumine</result>	
+	</action>
+
+    <action name="menumineApplyFilters" class="com.fsrin.menumine.core.menumine.webwork.ApplyFiltersAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumine</result>
+      <result name="success.single" type="chain">menumineStatisticalTable</result>
+      <result name="success.multi" type="chain">menumineStatisticalTableV2</result>
+      <result name="success.graph" type="chain">menumineGraph</result>
+    </action>
+    	
+    <action name="menumine" class="menuMineAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success.empty.old" type="dispatcher">menumineEmpty.action</result>      
+      <result name="success.spreadsheet" type="chain">menumineDisplaySpreadSheet</result>
+      <result name="success" type="chain">menumineDisplayStatisticalTableV2</result>
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    
+    <action name="menumineEmpty" class="emptyMenuMineAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+    </action>
+    
+    
+    
+    <action name="menumineSpreadSheet" class="menuMineAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplaySpreadSheet</result>
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    
+    <action name="menumineDisplaySpreadSheet" class="menuMineDisplaySpreadSheetAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineSpreadSheet.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/spreadsheet/displaySpreadsheet.jsp</result>
+    </action>
+
+    <action name="printableSpreadSheet" class="menuMineDisplaySpreadSheetAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineSpreadSheet.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/spreadsheet/printableSpreadsheet.jsp</result>
+    </action>
+    
+
+    
+
+    <action name="menumineStatisticalTable" class="menuMineAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineStatisticalTable.action</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplayStatisticalTable</result>
+      <result name="success-all" type="chain">menumineDisplayStatisticalTableV2</result>      
+     
+      <result name="success.temp" type="dispatcher">/WEB-INF/jsp/menumine/menushare/menuMineStatisticalTableSimple.jsp</result>
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+
+    <action name="menumineStatisticalTableV2" class="menuMineAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineStatisticalTableV2.action</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplayStatisticalTableV2</result>
+      <result name="success.temp" type="dispatcher">/WEB-INF/jsp/menumine/menushare/menuMineStatisticalTableSimpleV2.jsp</result>
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+
+    <action name="menumineDisplayStatisticalTable" class="menuMineDisplayStatisticalTableAction"> 
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineStatisticalTable.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/menushare/menuMineStatisticalTableSimple.jsp</result>
+      <result name="success-all" type="chain">menumineDisplayStatisticalTableV2</result>   
+            <result name="success-graph" type="chain">menumineGraph</result>    
+    </action>
+        
+    <action name="menumineDisplayStatisticalTableV2" class="menuMineDisplayStatisticalTableActionV2"> 
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineStatisticalTableV2.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/menushare/menuMineStatisticalTableSimpleV2.jsp</result>
+    </action>
+
+    <action name="menumineChainTrend" class="menuMineAction"> 
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineStatisticalTable.action</param>
+      <result name="success" type="chain">menumineDisplayChainTrend</result>
+    </action>
+    
+    <action name="menumineDisplayChainTrend" class="com.fsrin.menumine.core.menumine.webwork.MenuMineTableChainTrendAction"> 
+      <interceptor-ref name="defaultStack2" />
+	  <!--MJB 10-07-10 someone left out the word statistical in the post action, this was breaking same store chain trend.-->
+      <param name="postAction">menumineStatisticalTable.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/menushare/menuMineStatisticalTrendTable.jsp</result>
+    </action>
+    
+    <action name="menumineDisplayChainTrendExcel" class="com.fsrin.menumine.core.menumine.webwork.MenuMineTableChainTrendExcelAction"> 
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>    
+
+    <action name="menumineDisplayCuttingEdgeTrendExcel" class="com.fsrin.menumine.core.menumine.webwork.MenuMineTableCuttingEdgeTrendExcelAction"> 
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>    
+
+    
+    <action name="menumineCuttingEdgeTrend" class="menuMineAction"> 
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineStatisticalTable.action</param>
+      <result name="success" type="chain">menumineDisplayCuttingEdgeTrend</result>
+    </action>
+    
+    <action name="menumineDisplayCuttingEdgeTrend" class="com.fsrin.menumine.core.menumine.webwork.MenuMineTableCuttingEdgeTrendAction"> 
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineStatisticalTable.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/menushare/menuMineStatisticalTrendTable.jsp</result>
+    </action>
+    
+
+  
+    
+    
+    
+    
+    
+    <action name="menumineNatlAccountBenchmark" class="menuMineAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+     <!--<interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />-->
+      <param name="postAction">menumineNatlAccountBenchmark.action</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplayNatlAccountBenchmarkControl</result>
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+   
+    <action name="menumineDisplayNatlAccountBenchmarkControl" class="menumineDisplayNatlAccountBenchmarkControlAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <!--<interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />-->
+      <param name="postAction">menumineNatlAccountBenchmark.action</param>
+      <result name="success" type="chain">menumineDisplayNatlAccountBenchmark</result>
+      <result name="success-trend" type="chain">menumineDisplayNatlAccountBenchmarkTrend</result>
+      <!-- 2006-02-02
+      <result name="success-canned" type="chain">menumineDisplayNatlAccountBenchmarkCannedReport</result>
+      -->
+    </action>
+    
+    <action name="menumineDisplayNatlAccountBenchmark" class="menuMineDisplayNatlAccountBenchmarkAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <!--<interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />-->
+	  <param name="postAction">menumineNatlAccountBenchmark.action</param>
+      <param name="submit">Submit Query</param>
+      
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/natlaccountbench/menuMineNatlAccountBenchmarkTable.jsp</result>
+    </action>
+    
+    
+    <action name="menumineDisplayNatlAccountBenchmarkTrend" class="menumineDisplayNatlAccountBenchmarkTrendAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <!--<interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />-->
+      <param name="postAction">menumineNatlAccountBenchmark.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/natlaccountbench/menuMineNatlAccountBenchmarkTrendTable.jsp</result>
+    </action>
+    
+    <!--
+    	2006-02-02
+    <action name="menumineDisplayNatlAccountBenchmarkCannedReport" class="menuMineDisplayNatlAccountBenchmarkCannedReportAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />
+      <param name="postAction">menumineNatlAccountBenchmark.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/natlaccountbench/menuMineNatlAccountBenchmarkCannedReport.jsp</result>
+    </action>    
+    
+     <action name="menumineNatlAccountBenchmarkCannedReportExcel" class="menuMineDisplayNatlAccountBenchmarkCannedReportAction">
+      <interceptor-ref name="defaultStack2" />
+     <interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />
+      <result name="success" type="chain">menumineNatlAccountBenchmarkCannedReportExcel2</result>
+    </action>
+    <action name="menumineNatlAccountBenchmarkCannedReportExcel2" class="menuMineDisplayNatlAccountBenchmarkCannedReportExcelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>
+    -->
+    
+    
+    <!-- 2006-02-02 Simplified
+     <action name="natlAccountBenchmarkGraph" class="menuMineDisplayNatlAccountBenchmarkAction">
+         <interceptor-ref name="menuMineExecuteAndWaitStack" />
+         <interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />
+      <result name="success" type="chain">natlAccountBenchmarkGraphPart2</result>
+    </action>
+    -->
+    
+    <!-- 2006-02-02 RSC Was named ..."part2" -->
+    <action name="natlAccountBenchmarkGraph" class="menumineNationalAccountBenchMarkGraphAction">
+      <interceptor-ref name="defaultStack2" />
+      <!--<interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />-->
+      <result name="success" type="chart">
+        <param name="width">800</param>
+        <param name="height">600</param>
+      </result>
+    </action>
+
+<!--
+ <action name="natlAccountBenchmarkCannedGraph" class="menumineNationalAccountBenchMarkCannedGraphAction">
+      <interceptor-ref name="defaultStack2" />
+      <interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />
+      <result name="success" type="chart">
+        <param name="width">800</param>
+        <param name="height">600</param>
+      </result>
+    </action>
+    -->
+
+
+   
+    
+     <action name="menumineNatlAccountBenchmarkExcel" class="menuMineDisplayNatlAccountBenchmarkAction">
+      <interceptor-ref name="defaultStack2" />
+     <!--<interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />-->
+      <result name="success" type="chain">menumineNatlAccountBenchmarkExcel2</result>
+    </action>
+    <action name="menumineNatlAccountBenchmarkExcel2" class="menuMineDisplayNatlAccountBenchmarkExcelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>
+    
+    <action name="menumineNatlAccountBenchmarkTrendExcel" class="menumineDisplayNatlAccountBenchmarkTrendAction">
+     <interceptor-ref name="defaultStack2" />
+   <!--<interceptor-ref name="nationalAccountBenchmarkAuthorizerInterceptor" />-->
+      <result name="success" type="chain">menumineNatlAccountBenchmarkTrendExcel2</result>
+    </action>
+    <action name="menumineNatlAccountBenchmarkTrendExcel2" class="menuMineDisplayNatlAccountBenchmarkTrendExcelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>
+    
+    
+    
+    
+    
+    
+    <action name="listSavedRollUps" class="listSavedRollUpsAction">
+      <interceptor-ref name="defaultStack2" />
+    </action>
+    
+    <action name="selectSavedRollUp" class="selectSavedRollUpAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+    </action>
+    
+    <action name="saveRollUp" class="saveRollUpAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+      <result name="input" type="chain">menumineBuildRollUp</result>
+    </action>
+    
+    <action name="deleteRollUp" class="deleteRollUpAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+    </action>
+    
+    <action name="addFilterEliminatorFromRollUp" class="addFilterEliminatorFromRollUpAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+    </action>
+    
+    <action name="menumineBuildRollUp" class="menuMineAction">
+    <!-- 
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />-->
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineBuildRollUp.action</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/rollup/menuMineBuildRollUpSimple.jsp</result>
+      <result name="success" type="chain">menumineDisplayBuildRollUp</result>
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    
+    <action name="menumineDisplayBuildRollUp" class="menuMineDisplayBuildRollUpAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineBuildRollUp.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/rollup/menuMineBuildRollUpSimple.jsp</result>
+    </action>
+    
+    <action name="filterRollUp" class="menuMineFilterRollUpAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+    </action>
+
+    <action name="addRollUp" class="menuMineAddRollUpAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+      <result name="input" type="chain">menumineBuildRollUp</result>
+    </action>
+    
+    <action name="removeRollUpByLabelAndTerm" class="rollUpRemoveElementByLabelAndTermAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+      <result name="input" type="chain">menumineBuildRollUp</result>
+    </action>
+    
+    
+    <action name="autoRollUpBuilder" class="autoRollUpBuilderAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+      <result name="input" type="chain">menumineBuildRollUp</result>
+    </action>
+    
+    
+    
+    <action name="removeRollUp" class="menuMineRemoveRollUpAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+    </action>
+    <action name="removeRollUpByLabel" class="menuMineRemoveRollUpByLabelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+    </action>
+    <action name="resetRollUp" class="menuMineResetRollUpAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineBuildRollUp</result>
+    </action>
+    
+    <action name="menumineCategoryIncidence" class="menuMineAction">
+      <!-- 
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />-->
+	 <interceptor-ref name="defaultStack2" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplayCategoryIncidence</result>
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    
+    <action name="menumineDisplayCategoryIncidence" class="menuMineDisplayCategoryIncidenceAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineCategoryIncidence.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/categoryincidence/menuMineCategoryIncidence.jsp</result>
+      <result name="success-items" type="chain">menumineItemsPerChainMenuing</result>
+    </action>
+    
+    <action name="menumineCategoryIncidenceTrend" class="menuMineAction">
+	 <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineDisplayCategoryIncidenceTrend</result>
+    </action>    
+    <action name="menumineDisplayCategoryIncidenceTrend" class="com.fsrin.menumine.core.incidence.trend.xwork.DisplayCategoryIncidenceTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineCategoryIncidenceTrend.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/categoryincidence/menuMineCategoryIncidenceTrend.jsp</result>
+
+    </action>    
+        <action name="menumineDisplayCategoryIncidenceTrendAsExcel" class="com.fsrin.menumine.core.incidence.trend.xwork.DisplayCategoryIncidenceTrendAsExcelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>   
+    <action name="viewCategoryIncidenceSectorGraph" class="menuMineDisplayCategoryIncidenceAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">viewCategoryIncidenceSectorGraphPart2</result>
+    </action>
+    <action name="viewCategoryIncidenceSectorGraphPart2" class="wwViewCategoryIncidenceSectorGraph">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chart">
+        <param name="width">800</param>
+        <param name="height">600</param>
+      </result>
+    </action>
+    <action name="viewItemsPerChainMenuingSectorGraph" class="menuMineDisplayItemsPerChainMenuingAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">viewItemsPerChainMenuingSectorGraphPart2</result>
+    </action>
+    <action name="viewItemsPerChainMenuingSectorGraphPart2" class="wwViewItemsPerChainMenuingSectorGraph">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chart">
+        <param name="width">800</param>
+        <param name="height">600</param>
+      </result>
+    </action>
+    
+    <action name="menumineItemsPerChainMenuing" class="menuMineAction">
+       <interceptor-ref name="defaultStack2" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplayItemsPerChainMenuing</result>
+    </action>
+    
+    <action name="menumineDisplayItemsPerChainMenuing" class="menuMineDisplayItemsPerChainMenuingAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineItemsPerChainMenuing.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/itemsperchainmenuing/menuMineItemsPerChainMenuing.jsp</result>
+    </action>
+
+    <action name="menumineMarketSizeProjector" class="menuMineAction">
+		<interceptor-ref name="defaultStack2" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplayMarketSizeProjector</result>
+    </action>
+        
+    <action name="menumineDisplayMarketSizeProjector" class="com.fsrin.menumine.core.menumine.marketsize.xwork.DisplayMarketSizeProjectorAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineMarketSizeProjector</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/marketsize/marketsize.jsp</result>
+      <result name="success.excel" type="excel" />
+      <result name="success.graph" type="chain" >menumineDisplayMarketSizeGraph</result>
+    </action>   
+    
+    <action name="menumineDisplayMarketSizeGraph" class="com.fsrin.menumine.core.menumine.marketsize.xwork.DisplayMarketSizeProjectorGraphAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineMarketSizeProjector</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/graph/menuMineGraph.jsp</result>
+
+    </action>         
+
+    <action name="menumineDisplayMarketSizeProjectorAsExcel" class="com.fsrin.menumine.core.menumine.marketsize.xwork.DisplayMarketSizeProjectorAsExcelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel" />
+    </action>        
+    
+    <action name="menumineMedianPriceTrend" class="menuMineAction">
+       <interceptor-ref name="defaultStack2" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplayMedianPriceTrend</result>
+    </action>
+    
+    
+    <action name="menumineDisplayMedianPriceTrend" 
+    	class="menuMineDisplayMedianPriceTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineMedianPriceTrend.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/medianpricetrend/menuMineMedianPriceTrend.jsp</result>
+    </action>
+
+
+    <action name="menumineMeanPriceTrend" class="menuMineAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplayMeanPriceTrend</result>
+    </action>
+
+
+    <action name="menumineDisplayMeanPriceTrend" class="menuMineDisplayMeanPriceTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineMeanPriceTrend.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/meanpricetrend/menuMineMeanPriceTrend.jsp</result>
+      <result name="success-median" type="chain">menumineMedianPriceTrend</result>            
+    </action>
+
+
+    <action name="menumineCrossTabulation" class="menuMineAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <param name="postAction">menumineCrossTabulation.action</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplayCrossTabulation</result>
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    
+    
+    
+    <action name="menumineDisplayCrossTabulation" class="menuMineDisplayCrossTabulationAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineCrossTabulation.action</param>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/crosstabulation/menuMineCrossTabulation.jsp</result>
+    </action>
+    <action name="menumineGraph" class="menuMineAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="chain">menumineDisplayGraph</result>
+    </action>
+    
+    <action name="menumineDisplayGraph" class="menuMineDisplayGraphAction">
+      <interceptor-ref name="defaultStack2" />
+      <param name="postAction">menumineGraph.action</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/menumine/menumine.jsp</result>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/graph/menuMineGraph.jsp</result>
+    </action>
+    
+    <action name="lastStatFusion" class="com.fsrin.menumine.core.menumine.sharetable.webwork.ConvertLastStatisticalTableToFusionXMLAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/menushare/singleSeries3DPieChart.jsp</result>    
+    </action>
+    
+    
+    <action name="sampledistribution.xwork.SampleDistributionDistributionMenu" class="com.fsrin.menumine.core.menumine.sampledistribution.xwork.SampleDistributionMenuAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleDistributionMenu.jsp</result>
+    </action>
+    <action name="sampleDistributionMarketSegment" class="wwSampleDistributionMarketSegmentAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleDistribution.jsp</result>
+    </action>
+    <action name="sampleDistributionMarketSector" class="wwSampleDistributionMarketSectorAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleDistribution.jsp</result>
+    </action>
+    <action name="sampleDistributionMenuPart" class="wwSampleDistributionMenuPartAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleDistribution.jsp</result>
+    </action>
+    <action name="sampleDistributionBasicProtein" class="wwSampleDistributionBasicProteinAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleDistribution.jsp</result>
+    </action>
+    <action name="sampleDistributionCuisine" class="wwSampleDistributionCuisineAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleDistribution.jsp</result>
+    </action>
+    <action name="sampleDistributionCookingMethod" class="wwSampleDistributionCookingMethodAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleDistribution.jsp</result>
+    </action>
+    <action name="sampleDistributionOperationName" class="wwSampleDistributionOperationNameAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleDistribution.jsp</result>
+    </action>
+    <action name="sampleDistributionCuisineFamily" class="wwSampleDistributionCuisineFamilyAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleDistribution.jsp</result>
+    </action>
+    <action name="sampleDistributionGenCookingMethod" class="wwSampleDistributionGenCookingMethodAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleDistribution.jsp</result>
+    </action>
+    <action name="menumineHelp" class="com.opensymphony.xwork.ActionSupport">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/help.jsp</result>
+    </action>
+    <action name="sampleQuery" class="com.opensymphony.xwork.ActionSupport">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menumine/sampleQuery.jsp</result>
+    </action>
+    
+    
+    <action name="savedQueryList" class="wwSavedQueryListAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/savedqueries/savedqueries.jsp</result>
+    </action>
+    
+    <action name="savedQueryTemplateList" class="wwSavedQueryListTemplatesAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/savedqueries/savedquerytemplates.jsp</result>
+    </action>
+    
+    <action name="savedQueryModify" class="wwSavedQueryModifyAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/savedqueries/savedqueryModify.jsp</result>
+      <result name="success" type="dispatcher">savedQueryList.action</result>
+    </action>    
+    
+    <action name="convertToTemplate" class="com.fsrin.menumine.core.menumine.savedquery.xwork.ConvertSavedQueryToTemplateAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">savedQueryTemplateList.action</result>
+    </action>        
+    
+    <action name="savedQueryTemplateModify" class="com.fsrin.menumine.core.menumine.savedquery.xwork.SavedQueryTemplateModifyAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/savedqueries/savedqueryTemplateModify.jsp</result>
+      <result name="success" type="dispatcher">savedQueryTemplateList.action</result>
+    </action>    
+    
+    <action name="savedQueryTemplateDelete" class="com.fsrin.menumine.core.menumine.savedquery.xwork.SavedQueryTemplateDeleteAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">savedQueryTemplateList.action</result>
+    </action>        
+        
+    <!-- ChainStat Actions -->
+    <action name="chainStatList" class="chainStatListAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/chainstat/chainStatList.jsp</result>
+    </action>
+    <action name="chainStatDetail" class="chainStatDetailAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/chainstat/chainStatDetail.jsp</result>
+    </action>
+    
+    <action name="chainStatDetailExcel" class="chainStatDetailAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">chainStatDetailExcelPart2</result>
+    </action>
+    <action name="chainStatDetailExcelPart2" class="chainStatDetailExcelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel"/>
+    </action>    
+    
+    <action name="chainStatMenuCam" class="chainStatMenuCamAction">
+      <interceptor-ref name="defaultStack2" />
+    </action>
+    
+    <!-- 2006-01-31 RSC
+    <action name="chainStatRss" class="chainStatRssAction">
+      <interceptor-ref name="defaultStack2" />
+    </action>
+    -->
+    
+    <!-- MenuBook Actions -->
+    <action name="menuBookList" class="chainStatListAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menubook/menuBookList.jsp</result>
+    </action>
+    <action name="menuBook" class="menuBookAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menubook/menuBook.jsp</result>
+    </action>
+    <action name="menuBookTrendList" class="chainStatListAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menubook/menuBookTrendList.jsp</result>
+    </action>
+    <action name="menuBookTrend" class="menuBookTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menubook/menuBookTrend.jsp</result>
+    </action>
+    <action name="menuBookTrendMenuPart" class="menuBookTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menubook/menuBookTrendRollUp.jsp</result>
+    </action>
+    <action name="menuBookTrendGraphBuilder" class="menuBookTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/menubook/menuBookTrendGraphBuilder.jsp</result>
+    </action>
+    <action name="menuBookTrendGraph" class="menuBookTrendAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menuBookTrendGraphPart2</result>
+    </action>
+    <action name="menuBookTrendGraphPart2" class="menuBookTrendGraphAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chart">
+        <param name="width">800</param>
+        <param name="height">600</param>
+      </result>
+    </action>
+
+    <action name="menuBookExcel" class="menuBookAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menuBookExcelPart2</result>
+    </action>
+    <action name="menuBookExcelPart2" class="menuBookExcelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel">     
+      </result>
+    </action>    
+    
+    
+    <action name="menuBookTrendExcel" class="menuBookAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menuBookExcelTrendPart2</result>
+    </action>
+    <action name="menuBookExcelTrendPart2" class="menuBookTrendExcelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel">
+     
+      </result>
+    </action> 
+    
+    
+    
+    
+    
+    
+    
+    <!-- Profiler -->
+    <!--
+    <action name="masterFoodProfiler" class="masterFoodProfilerAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <param name="postAction">masterFoodProfiler.action</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+     <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    -->
+    <action name="flavorProfiler" class="flavorProfilerAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <param name="postAction">flavorProfiler.action</param>
+      <param name="profilerTitle">Flavor Profiler</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <!--  RSC 2006-02-09 RSC
+      <result name="excel" type="chain">profilerExcel</result>  -->
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    <action name="proteinProfiler" class="proteinProfilerAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <param name="postAction">proteinProfiler.action</param>
+      <param name="profilerTitle">Protein Profiler</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <!--  2006-02-09 RSC
+      <result name="excel" type="chain">profilerExcel</result>  -->
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    <action name="carboProfiler" class="carboProfilerAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <param name="postAction">carboProfiler.action</param>
+      <param name="profilerTitle">Carbo Profiler</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <!--  2006-02-09 RSC
+      <result name="excel" type="chain">profilerExcel</result>  -->
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    <action name="veggieProfiler" class="veggieProfilerAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <param name="postAction">veggieProfiler.action</param>
+      <param name="profilerTitle">Vegetable Profiler</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <!--  2008-02-09 RSC
+      <result name="excel" type="chain">profilerExcel</result>  -->
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    <action name="dessertProfiler" class="dessertProfilerAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <param name="postAction">dessertProfiler.action</param>
+      <param name="profilerTitle">Dessert Profiler</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <!--  2006-02-09 RSC
+      <result name="excel" type="chain">profilerExcel</result>      -->
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    
+    
+    <action name="healthyProfiler" class="healthyProfilerAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <param name="postAction">healthyProfiler.action</param>
+      <param name="profilerTitle">Healthy Profiler</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <!--  2006-02-09 RSC
+      <result name="excel" type="chain">profilerExcel</result>  -->
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    
+    
+    <action name="marketProfiler" class="marketProfilerAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <param name="postAction">marketProfiler.action</param>
+      <param name="profilerTitle">Market Profiler</param>
+      <result name="input" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <result name="success" type="dispatcher">/WEB-INF/jsp/profiler/profilerDetail.jsp</result>
+      <!-- 2006-02-09 RSC
+      <result name="excel" type="chain">profilerExcel</result>  -->
+      <result name="wait">/WEB-INF/jsp/menumine/pleaseWait.jsp</result>
+    </action>
+    
+    
+ 
+     <action name="profilerExcel" class="profilerExcelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel"></result>
+    </action>
+    
+    
+    
+    <action name="profilerApplicationChart" class="profilerApplicationChartAction">
+      <interceptor-ref name="menuMineExecuteAndWaitStack" />
+      <result name="success" type="chart">
+        <param name="width">800</param>
+        <param name="height">600</param>
+      </result>
+    </action>
+    
+    <!-- 2006-01-31 Dead
+    <action name="forumMain" class="forumMainAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/forum/forumMain.jsp</result>
+    </action>
+    <action name="viewForumGroup" class="viewForumGroupAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/forum/viewForumGroup.jsp</result>
+    </action>
+    <action name="addForumMessage" class="addForumMessageAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="input" type="dispatcher">/WEB-INF/jsp/forum/forumMessageForm.jsp</result>
+      <result name="success" type="chain">viewForumGroup</result>
+    </action>
+    <action name="deleteForumMessage" class="deleteForumMessageAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">viewForumGroup</result>
+    </action>
+    -->
+    
+    <!-- Login History Actions -->
+    <action name="loginHistoryList" class="loginHistoryListAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/loginhistory/loginhistory.jsp</result>
+    </action>
+ 
+ 
+ 
+ 	<!--CHAIN MAP -->
+    <action name="chainMap" class="chainMapAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/chainmap/chainmap.jsp</result>
+    </action>
+    
+    <action name="chainMapSetTargetCollection" class="chainMapSetTargetCollectionAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">chainMap</result>
+    </action>
+    
+    
+    
+ <action name="chainMapExcel" class="chainMapAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">chainMapExcelPart2</result>
+    </action>
+
+ <action name="chainMapExcelPart2" class="chainMapExcelAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="excel"></result>
+    </action>
+
+
+	<!-- 2006-09-13 reid@fivesticks.com
+    <action name="chainMapImage" class="chainMapAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">chainMapImagePart2</result>
+    </action>
+    <action name="chainMapImagePart2" class="chainMapImageAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="image"></result>
+    </action>-->
+    
+    <!-- 2006-09-13 reid@fivesticks.com
+     <action name="chainMapImageByState" class="chainMapAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">chainMapImageByStatePart2</result>
+    </action>
+    <action name="chainMapImageByStatePart2" class="chainMapImageByStateAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="image"></result>
+    </action>-->
+    
+    
+    <!-- 2006-09-13 What's Analog? STATS reid@fivesticks.com -->
+    <action name="analog" class="menuMineSessionContextAwareAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/analog/MenuMineReport.jsp</result>
+    </action>
+
+    <action name="menumineExpressSearch" class="menuMineExpressAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumine</result>
+     <result name="success.test" type="chain">menumineDisplayStatisticalTableV2</result>
+      
+      <result name="success.profilerFlavor" type="chain">flavorProfiler</result>
+      <result name="success.profilerProtein" type="chain">proteinProfiler</result>
+      <result name="success.profilerCarbo" type="chain">carboProfiler</result>
+      <result name="success.profilerVeggie" type="chain">veggieProfiler</result>
+      <result name="success.profilerDessert" type="chain">dessertProfiler</result>
+      <result name="success.profilerHealthy" type="chain">healthyProfiler</result>
+      <result name="success.profilerMarket" type="chain">marketProfiler</result>
+      
+      <result name="input" type="chain">menumine</result>
+    </action>
+    
+    <action name="menumineNewItems" class="com.fsrin.menumine.core.menumine.express.xwork.MenuMineNewItemsAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineSpreadSheet</result>
+    </action>    
+    
+    <action name="menumineSaveQuery" class="saveQueryAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumine</result>    
+    </action>
+
+    <action name="menumineLoadQuery" class="loadQueryAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumine</result>    
+    </action>
+    
+    <action name="menumineLoadTemplate" class="com.fsrin.menumine.core.menumine.savedquery.xwork.LoadCustomTemplateAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumine</result>    
+    </action>    
+
+
+	<action name="flavorTrak" class="com.fsrin.menumine.core.flavortrak.xwork.FlavorTrakAction">
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/flavortrak/flavortrak.jsp</result>    	
+	</action>
+	
+	<action name="updateFlavorTrakContext" class="com.fsrin.menumine.core.flavortrak.xwork.UpdateFlavorTrakContextAction" >
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>    		
+	</action>
+	
+	<action name="getFlavorTrakResults" class="com.fsrin.menumine.core.flavortrak.xwork.GetFlavorTrakResultsAction" >
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>  	
+	</action>
+
+	<action name="menumineFlavorTrakToSpreadsheet" class="com.fsrin.menumine.core.flavortrak.xwork.FlavorTrakToSpreadsheetAction" >
+      <interceptor-ref name="defaultStack2" />
+      <result name="success" type="chain">menumineSpreadSheet</result>	
+	</action>
+	
+	
+
+  </package>
+</xwork>
+

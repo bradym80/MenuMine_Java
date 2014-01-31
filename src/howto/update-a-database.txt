@@ -1,0 +1,35 @@
+How to Update a Database
+
+Last updated: 2007/02/27 (reid)
+
+1. Joe will give you an access database with updated information.
+
+2. Convert the access database to MySQL using an automatic tool such as PremiumSoft's Navicat
+
+3. Create any new FieldEnums you might need for additional data FSRIN has added to their
+product.
+
+4. Update src/non-java/spring.properties properties to reflect the new data location
+
+5. Execute the test UpdateDatabaseStructureCommandTest (src/java-util/produtil)
+
+6. Execute the SQL statements in src/sql/data-ddl-2006-02-16 -- note that some of 
+these will already have been taken care of by the previous step and MySQL will 
+return an error.  No big deal.
+
+7. Execute the test DataEmptyToNullConverterCommandTest (src/java-util/produtil).  This converts
+0 dollar values and empty strings to NULLS for easier display
+
+8. Execute the test KeywordBuilderCommandTest (src/java-util/produtil).  This takes a while as it
+goes through every record to find all unique works in any field.  It will output
+progress statements to the console.
+
+The database is now ready to use.
+
+01-20-09 MJB
+1.backup the existing menumine database on both the production and development machine prior to deployment.
+2.execute the make_menumine.sql script.
+3. Run Update UpdateDatabaseStructureCommandTest
+4. Run make_menumine2.sql script
+5. Run DataEmptyToNullConverterCommandTest
+6. Run KeywordBuilderCommandTest

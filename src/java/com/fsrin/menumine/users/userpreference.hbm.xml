@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fsrin.menumine.users.UserPreference" table="userpref">
+    <id name="id" column="prefId" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+	<property name="username" 
+		column="prefUserName" 
+		type="string" 
+		length="20" 
+		not-null="true" 
+		unique="false" />
+
+	<property name="key" 
+		column="prefKey" 
+		type="string" 
+		length="50" 
+		not-null="true" 
+		unique="false" />
+
+	<property name="value" 
+		column="prefValue" 
+		type="string" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+						
+			
+  </class>
+  
+ 
+  
+
+
+</hibernate-mapping>

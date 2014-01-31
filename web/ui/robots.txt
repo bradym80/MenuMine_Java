@@ -1,0 +1,3 @@
+# Excludes all robots from using this site. 2006-03-15 RSC
+User-agent: *
+Disallow: /

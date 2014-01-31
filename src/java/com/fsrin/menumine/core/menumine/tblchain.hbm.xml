@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 2006-02-15 RSC
+	Note about the table.
+	The field "ID" doesn't mean anything.
+	The field "1" contains the ID that links to the ChainID field in
+	tblmasterfood. -->
+	
+<hibernate-mapping>
+
+  <class name="com.fsrin.menumine.core.menumine.chain.Chain" table="tblchain" proxy="com.fsrin.menumine.core.menumine.chain.Chain">
+    <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+    
+	<property name="operationName" 
+		column="Chain" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+		
+	<property name="segment" 
+		column="segment" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="sectorName" 
+		column="sectorname" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="hqState" 
+		column="HQState" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="hqRegion" 
+		column="HQRegion" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="operatorType" 
+		column="OperatorType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="countryLoc" 
+		column="CountryLoc" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+	  
+	<property name="yearPutInDatabase" 
+		column="FirstYearInDatabase" 
+		type="java.lang.Integer" 
+		not-null="false" 
+		unique="false" />
+		
+		
+</class>
+  
+
+</hibernate-mapping>

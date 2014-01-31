@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+
+
+
+  <class name="com.fsrin.menumine.core.menumine.MasterFoodFilterParametersImpl" table="masterfoodfilterparameters" proxy="com.fsrin.menumine.core.menumine.MasterFoodFilterParametersImpl">
+    <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+       	<property name="name" 
+		column="name" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+
+	<!-- RSC 2006-02-06    		  
+	 <many-to-one name="chain" 
+	 	class="com.fsrin.menumine.core.menumine.chain.ChainFilterParameters"  
+	 	column="chainParamsId"  cascade="all" lazy="false" /> 
+	 	-->
+	 
+	  <set name="filterParameters" table="filterparameter" 
+	  	cascade="all" lazy="false" >
+	       <key column="mfCollectionId"/>
+	        <one-to-many class="com.fsrin.menumine.common.FilterParameter"/>
+	  </set>
+    
+  </class>
+  
+</hibernate-mapping>

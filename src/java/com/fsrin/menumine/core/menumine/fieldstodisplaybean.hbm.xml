@@ -1,0 +1,988 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+
+
+
+  <class name="com.fsrin.menumine.core.menumine.FieldsToDisplayBean" table="fieldstodisplaybean" proxy="com.fsrin.menumine.core.menumine.FieldsToDisplayBean">
+    <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+     
+    <property name="basicProtein" 
+		column="basicProtein" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="proteinTypeCut" 
+		column="proteinTypeCut" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+				
+	<property name="proteinType" 
+		column="proteinType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+	
+	<!-- 2009-06-01 MJB added 9 protein fields below.  -->	
+	<property name="chickenType" 
+		column="chickenType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="beefType" 
+		column="beefType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="porkType" 
+		column="porkType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="fishType" 
+		column="fishType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="seafoodType" 
+		column="seafoodType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="lambType" 
+		column="lambType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="turkeyType" 
+		column="turkeyType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="otherProteinType" 
+		column="otherProteinType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="shrimpType" 
+		column="shrimpType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+  
+	<property name="cookMeth" 
+		column="cookMeth" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="genCookMeth" 
+		column="genCookMeth" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="sauceCondDressMarMM" 
+		column="sauceCondDressMarMM" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="menuItem" 
+		column="menuItem" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="menuItemType" 
+		column="menuItemType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="itemDescription" 
+		column="itemDescription" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="cuisine" 
+		column="cuisine" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="cuisineFamily" 
+		column="cuisineFamily" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="genMenuPart" 
+		column="genMenuPart" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="menuItemClass" 
+		column="menuItemClass" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="menuStatus" 
+		column="menuStatus" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+	
+	<!-- MJB 11-12-2009 -->
+	<property name="price2011" 
+		column="price2011" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="price2010" 
+		column="price2010" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+			
+	<!-- DBB 1-20-2009 -->
+	<property name="price2009" 
+		column="price2009" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="price2008" 
+		column="price2008" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<!-- JDL 10-5-07 -->
+	<property name="price2007" 
+		column="price2007" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="price2006" 
+		column="price2006" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="price2005" 
+		column="price2005" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="price2004" 
+		column="price2004" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+
+		
+	<property name="price2003" 
+		column="price2003" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="price2002" 
+		column="price2002" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		
+	<property name="price2001" 
+		column="price2001" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		
+	<property name="price2000" 
+		column="price2000" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+			
+	<property name="price1999" 
+		column="price1999" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+	
+    <property name="price1998" 
+		column="price1998" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="price1997" 
+		column="price1997" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="price1996" 
+		column="price1996" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+   
+	<property name="carboVegFruit" 
+		column="carboVegFruit" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="flavEnhancSeasBrdgDesIngredMM" 
+		column="flavEnhancSeasBrdgDesIngredMM" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="topFillIngredMM" 
+		column="topFillIngredMM" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="cheeseMM" 
+		column="cheeseMM" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+  	<property name="breadBakeGoodsMM" 
+		column="breadBakeGoodsMM" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    
+   
+		
+	<!-- DessertMine Fields -->
+    <property name="dayPartCategory" 
+		column="DayPartCategory" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="cakeIngredient" 
+		column="CakeIngredient" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="cakeUse" 
+		column="CakeUse" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+		
+	 <property name="cookieIngredient" 
+		column="CookieIngredient" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="cookieUse" 
+		column="CookieUse" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="dessertDoughCrustIngred" 
+		column="DessertDoughCrustIngred" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="iceCreamIngredient" 
+		column="IceCreamIngredient" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="syrupTopping" 
+		column="[Syrup/Topping]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="nutIngredient" 
+		column="NutIngredient" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="fruitOrFruitFillingIngred" 
+		column="FruitorFruitFillingIngred" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="whippedToppingIngred" 
+		column="WhippedToppingIngred" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="candyIngredient" 
+		column="CandyIngredient" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="primaryFlavor" 
+		column="PrimaryFlavor" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="tasteFlavorWords" 
+		column="TasteFlavorWords" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="brand" 
+		column="Brand" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+	
+	
+		<property name="veggieFruitMM" 
+		column="VeggieFruitMM" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="carboMM" 
+		column="CarboMM" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="carboAll" 
+		column="CarboAll" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+	
+		<property name="breadUse" 
+		column="BreadUse" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+	
+		<property name="flavApplication" 
+		column="FlavApplication" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+	
+		<property name="flavorSoup" 
+		column="FlavorSoup" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+	
+		<property name="sideOrAccomp" 
+		column="SideOrAccomp" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	
+		<property name="healthyTerm" 
+		column="HealthyTerm" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		
+
+		<property name="cookingSauceOrGravy" 
+		column="[Cooking Sauce or Gravy]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="marinade" 
+		column="Marinade" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="glaze" 
+		column="Glaze" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="dressings" 
+		column="Dressings" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		
+		<property name="dipSauceName" 
+		column="DipSauceName" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="dairyButterCream" 
+		column="DairyButterCream" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="tomatoType" 
+		column="TomatoType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="onionScallionLeek" 
+		column="OnionScallionLeek" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="mushroomType" 
+		column="MushroomType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+		
+		<property name="condiments" 
+		column="Condiments" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+		
+		<property name="butterApplication" 
+		column="ButterApplication" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="seasoningName" 
+		column="SeasoningName" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		
+		<property name="batterBreadingCoating" 
+		column="[Batter/Breading/Coating]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="stuffName" 
+		column="[Stuff Name]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="cheeseRollUp" 
+		column="CheeseRollUp" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+ 
+		<property name="cheeseCheeseSauceFillingType" 
+		column="[Cheese/CheeseSauceFillingType]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+
+
+		<property name="proteinTopName" 
+		column="ProteinTopName" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="proteinAccompName" 
+		column="ProteinAccompName" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+
+		<property name="veggieFruitType" 
+		column="VeggieFruitType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="greenVegName" 
+		column="GreenVegName" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="vegTopName" 
+		column="VegTopName" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="vegAccompName" 
+		column="VegAccompName" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="fruitType" 
+		column="[Fruit Type]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="carboType" 
+		column="CarboType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="carboTopName" 
+		column="CarboTopName" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="carboAccompName" 
+		column="CarboAccompName" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="breadWrapChips" 
+		column="[Bread/Wrap/Chips]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+
+ <property name="eggType" 
+		column="[Egg Type]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+<property name="hotColdCereal" 
+		column="[Hot/Cold Cereal]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+
+
+<property name="spreadType" 
+		column="[Spread Type]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+<property name="breakfastPastry" 
+		column="BreakfastPastry" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+<property name="breakCakeWaff" 
+		column="BreakCakeWaff" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="logoImageStyle" 
+		column="LogoImageStyle" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="bevSize" 
+		column="BevSize" 
+	type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="servingCount" 
+		column="ServingCount" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	<property name="operationName" 
+		column="chain" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		
+	<property name="segment" 
+		column="segment" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="sectorName" 
+		column="sector" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="hqState" 
+		column="hqState" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="hqRegion" 
+		column="HQRegion" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="operatorType" 
+		column="OperatorType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="countryLoc" 
+		column="CountryLoc" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	  
+	<property name="yearPutInDatabase" 
+		column="FirstYearInDatabase" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+	
+	<property name="yearPutInDatabaseSameStore" 
+		column="FirstYearInDatabaseSameStore" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	
+	<!-- Reid 2006-03-02
+	<property name="masterfoodId" 
+		column="MasterfoodId" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		-->
+  
+	<property name="proteinFishShrimpSeafood" 
+		column="ProteinFishShrimpSeafood" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="keywords" 
+		column="keywords" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+  
+  <!-- 2006-08-02 reid@fivesticks.com types and uses fields -->
+      <property name="cuisineVerySpecific" 
+		column="CuisineVerySpecific" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+    <property name="grillRoastSmoke" 
+		column="GrillRoastSmoke" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+    <property name="vegCookMeth" 
+		column="VegCookMeth" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+    <property name="cookSauceType" 
+		column="CookSauceType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+    <property name="dressingType" 
+		column="DressingType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="dressingFlavor" 
+		column="DressingFlavor" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+    <property name="mexBreadType" 
+		column="MexBreadType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+    <property name="roastVegItemType" 
+		column="RoastVegItemType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="appetClassTyp" 
+		column="appetClassTyp" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+    <property name="prepEntreeType" 
+		column="PrepEntreeType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+    <property name="breadedFriedAppSide" 
+		column="BreadedFriedAppSide" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+    <property name="potatoTypeUse" 
+		column="PotatoTypeUse" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+    <property name="salsaType" 
+		column="SalsaType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+    <property name="CookieLookAlikeDessert" 
+		column="cookieLookAlikeDessert" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+    <property name="breakfastToGo" 
+		column="BreakfastToGo" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+
+    <property name="pizzaStyle" 
+		column="PizzaStyle" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="bbqCook" 
+		column="BBQCook" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="ethnicBreadType" 
+		column="EthnicBreadType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+    <property name="pepperType" 
+		column="PepperType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />	
+
+    <property name="riceTypeUse" 
+		column="RiceTypeUse" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="mexIngredUse" 
+		column="MexIngredUse" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="flavorChangeAnyYear" 
+		column="FlavorChangeAnyYear" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+  
+  
+
+
+
+    <property name="newItemBrag" 
+		column="NewItemBrag" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="proteinFlavorApp" 
+		column="ProteinFlavorApp" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="oilTypeUse" 
+		column="OilTypeUse" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="eggItemUse" 
+		column="EggItemUse" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="cheeseForm" 
+		column="CheeseForm" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="cheeseSauceFillingType" 
+		column="CheeseSauceFillingType" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+		
+    <property name="soupWith" 
+		column="SoupWith" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="soupBaseBroth" 
+		column="SoupBaseBroth" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+		
+    <property name="veggieAll" 
+		column="VeggieAll" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="allVegCarbFruit" 
+		column="AllVegCarbFruit" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />			
+
+	<!-- 7-25-07 JDL -->
+	<property name="bevMenuItem" 
+		column="BevMenuItem" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="sideAccompDisFlavor" 
+		column="[Side/AccompDishFlavor]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="cookieTypeSource" 
+		column="[CookieType/Source]" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="creamyTop" 
+		column="CreamyTop" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="creamyFill" 
+		column="CreamyFill" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="textureAttrib" 
+		column="TextureAttrib" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="qualityStyle" 
+		column="QualityStyle" 
+		type="java.lang.Boolean" 
+		not-null="false" 
+		unique="false" />
+		
+		<!--END JDL-->
+			
+    	
+  </class>
+  
+</hibernate-mapping>

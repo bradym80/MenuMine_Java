@@ -1,0 +1,1169 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fsrin.menumine.core.menumine.masterfood.MasterFood" table="tblmasterfood" lazy="true" mutable="false">
+    <id name="id" column="ID" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+	<property name="chainID" 
+		column="ChainID" 
+		type="java.lang.Integer" 
+		not-null="false" 
+		unique="false" />
+	
+	<!--
+	<many-to-one name="chain" class="com.fsrin.menumine.core.menumine.chain.Chain"  column="Chain" property-ref="operationName"/>
+	-->
+	
+	<property name="sectorName" 
+		column="SectorName" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+	
+	<property name="segment" 
+		column="Segment" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="operationName" 
+		column="OperationName" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="yearPutInDatabase" 
+		column="YearPutInDatabase" 
+		type="java.lang.Integer" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="yearPutInDatabaseSameStore" 
+		column="YearPutInDatabase" 
+		type="java.lang.Integer" 
+		not-null="false" 
+		unique="false" 
+		insert="false"
+		update="false" />
+
+	<property name="hqState" 
+		column="HQState" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="hqRegion" 
+		column="HQRegion" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="operatorType" 
+		column="OperatorType" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="countryLoc" 
+		column="CountryLoc" 
+		type="java.lang.String" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+		
+	
+	
+	<property name="menuStatus" 
+		column="MenuStatus" 
+		type="string" 
+		length="255" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="menuItem" 
+		column="MenuItem" 
+		type="string" 
+		length="255" 
+		not-null="false" 
+		unique="false" />	
+		
+	
+		
+	<property name="menuItemType" 
+		column="MenuItemType" 
+		type="string" 
+		length="255" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="genMenuPart" 
+		column="GenMenuPart" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="menuItemClass" 
+		column="[Menu Item Class]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="itemDescription" 
+		column="ItemDescription" 
+		type="string" 
+		length="65536" 
+		not-null="false" 
+		unique="false" />		
+	
+
+    
+    <!-- 2009-06-01 MJB added the 9 protein fields below. -->
+    <property name="proteinTypeCut" 
+		column="[Protein Type/Cut]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="chickenType" 
+		column="ChickenType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="beefType" 
+		column="BeefType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="porkType" 
+		column="PorkType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="fishType" 
+		column="FishType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="seafoodType" 
+		column="SeafoodType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="lambType" 
+		column="LambType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="turkeyType" 
+		column="TurkeyType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="otherProteinType" 
+		column="OtherProteinType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="shrimpType" 
+		column="ShrimpType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+			
+    <property name="proteinType" 
+		column="ProteinType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="basicProtein" 
+		column="BasicProtein" 
+		type="string" 
+		length="50"  
+		not-null="false" 
+		unique="false" />
+		
+	<property name="genCookMeth" 
+		column="GenCookMeth" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="cookMeth" 
+		column="CookMeth" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="cuisine" 
+		column="Cuisine" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="cuisineFamily" 
+		column="[Cuisine, Family]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+	
+	<!--  MJB 11-12-2009 2010 Prices -->
+		<property name="price2011" 
+		column="[2011 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="price2010" 
+		column="[2010 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+	
+	<!--  DBB 1-20-2009 add 2008, 2009 -->
+		<property name="price2009" 
+		column="[2009 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+	
+		<property name="price2008" 
+		column="[2008 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+			
+	<!--JDL 10-5-07 jdlFloat-->
+	<property name="price2007" 
+		column="[2007 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="price2006" 
+		column="[2006 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />			
+		
+			
+    <property name="price2005" 
+		column="[2005 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />		
+
+    <property name="price2004" 
+		column="[2004 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+		
+    <property name="price2003" 
+		column="[2003 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+	
+    <property name="price2002" 
+		column="[2002 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+		
+		
+    <property name="price2001" 
+		column="[2001 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+		
+		
+    <property name="price2000" 
+		column="[2000 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />		
+		
+    <property name="price1999" 
+		column="['99 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="price1998" 
+		column="['98 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="price1997" 
+		column="['97 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+
+	<property name="price1996" 
+		column="['96 Price]" 
+		type="java.lang.Double" 
+		not-null="false" 
+		unique="false" />
+
+	    <property name="carboVegFruit" 
+		column="AccompSideIngredMM" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<!-- 10-14-08 MJB Changed length of field here and in database. -->	
+    <property name="sauceCondDressMarMM" 
+		column="SauceCondDressMarMM" 
+		type="string" 
+		length="255" 
+		not-null="false" 
+		unique="false" />		
+    
+    
+    <property name="flavEnhancSeasBrdgDesIngredMM" 
+		column="FlavEnhancSeasBrdgDesIngredMM" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	   
+		
+		
+		
+    <property name="topFillIngredMM" 
+		column="[Top/Fill/IngredMM]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	 
+		
+    <property name="cheeseMM" 
+		column="Cheese" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+		
+    <property name="breadBakeGoodsMM" 
+		column="BreadBakeGoodsMM" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />		
+		
+	<!-- DessertMine Fields -->
+    <property name="dayPartCategory" 
+		column="DayPartCategory" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="cakeIngredient" 
+		column="CakeIngredient" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="cakeUse" 
+		column="CakeUse" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	 <property name="cookieIngredient" 
+		column="CookieIngredient" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="cookieUse" 
+		column="CookieUse" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="dessertDoughCrustIngred" 
+		column="DessertDoughCrustIngred" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="iceCreamIngredient" 
+		column="IceCreamIngredient" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="syrupTopping" 
+		column="[Syrup/Topping]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="nutIngredient" 
+		column="NutIngredient" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="fruitOrFruitFillingIngred" 
+		column="FruitorFruitFillingIngred" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="whippedToppingIngred" 
+		column="WhippedToppingIngred" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="candyIngredient" 
+		column="CandyIngredient" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="primaryFlavor" 
+		column="PrimaryFlavor" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="tasteFlavorWords" 
+		column="TasteFlavorWords" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="brand" 
+		column="Brand" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+	
+	
+		<property name="veggieFruitMM" 
+		column="VeggieFruitMM" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+	
+		<property name="carboMM" 
+		column="CarboMM" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="carboAll" 
+		column="CarboAll" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+	
+		<property name="breadUse" 
+		column="BreadUse" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+	
+		<property name="flavApplication" 
+		column="FlavApplication" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+	
+		<property name="flavorSoup" 
+		column="FlavorSoup" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+	
+		<property name="sideOrAccomp" 
+		column="SideOrAccomp" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+	
+		
+	
+		<property name="healthyTerm" 
+		column="HealthyTerm" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+		
+
+		<property name="cookingSauceOrGravy" 
+		column="[Cooking Sauce or Gravy]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="marinade" 
+		column="Marinade" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="glaze" 
+		column="Glaze" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="dressings" 
+		column="Dressings" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="dipSauceName" 
+		column="DipSauceName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="dairyButterCream" 
+		column="DairyButterCream" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="onionScallionLeek" 
+		column="OnionScallionLeek" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="mushroomType" 
+		column="MushroomType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+				
+		<property name="tomatoType" 
+		column="TomatoType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="condiments" 
+		column="Condiments" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+		<property name="butterApplication" 
+		column="ButterApplication" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="seasoningName" 
+		column="SeasoningName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="batterBreadingCoating" 
+		column="[Batter/Breading/Coating]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+
+		<property name="stuffName" 
+		column="[Stuff Name]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="cheeseRollUp" 
+		column="CheeseRollUp" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+ 
+		<property name="cheeseCheeseSauceFillingType" 
+		column="[Cheese/CheeseSauceFillingType]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+
+
+		<property name="proteinTopName" 
+		column="ProteinTopName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="proteinAccompName" 
+		column="ProteinAccompName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+
+		<property name="veggieFruitType" 
+		column="VeggieFruitType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+
+		<property name="greenVegName" 
+		column="GreenVegName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="vegTopName" 
+		column="VegTopName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="vegAccompName" 
+		column="VegAccompName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="fruitType" 
+		column="[Fruit Type]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="carboType" 
+		column="CarboType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="carboTopName" 
+		column="CarboTopName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="carboAccompName" 
+		column="CarboAccompName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+		<property name="breadWrapChips" 
+		column="[Bread/Wrap/Chips]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+ 
+
+
+ <property name="eggType" 
+		column="[Egg Type]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+<property name="hotColdCereal" 
+		column="[Hot/Cold Cereal]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+
+
+<property name="spreadType" 
+		column="[Spread Type]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+<property name="breakfastPastry" 
+		column="BreakfastPastry" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+
+<property name="breakCakeWaff" 
+		column="BreakCakeWaff" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="logoImageStyle" 
+		column="LogoImageStyle" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+		<property name="bevSize" 
+		column="BevSize" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="servingCount" 
+		column="ServingCount" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<!-- RSC 2006-01-17 -->
+	<property name="proteinFishShrimpSeafood"
+		column="[Finfish species]"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />
+		 
+	<!-- RSC 2006-03-30 -->
+	<property name="keywords"
+		column="keywords"
+		type="string"
+		length="65535"
+		not-null="false"
+		unique="false" />		  
+		
+	<!-- RSC 2006-04-19 -->
+	<property name="otherAccompaniments" 
+		column="OtherAccompaniments" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="otherIngredName" 
+		column="OtherIngredName" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="otherToppings" 
+		column="OtherToppings" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="otherTopIngred" 
+		column="[OtherTop/Ingred]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />		
+		
+	<property name="healthyFlag" 
+		column="HealthyFlag" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="healthySymbol" 
+		column="HealthySymbol" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />					
+	
+    <property name="fillingSaucesDressings" 
+		column="[FillingSauces/Dressings]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+    <property name="cuisineVerySpecific" 
+		column="CuisineVerySpecific" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="grillRoastSmoke" 
+		column="GrillRoastSmoke" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="vegCookMeth" 
+		column="VegCookMeth" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="cookSauceType" 
+		column="CookSauceType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="dressingType" 
+		column="DressingType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="dressingFlavor" 
+		column="DressingFlavor" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="mexBreadType" 
+		column="MexBreadType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="roastVegItemType" 
+		column="RoastVegItemType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="appetClassTyp" 
+		column="appetClassTyp" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="prepEntreeType" 
+		column="PrepEntreeType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="breadedFriedAppSide" 
+		column="BreadedFriedAppSide" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="potatoTypeUse" 
+		column="PotatoTypeUse" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="salsaType" 
+		column="SalsaType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="cookieLookAlikeDessert" 
+		column="CookieLookAlikeDessert" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="breakfastToGo" 
+		column="BreakfastToGo" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="pizzaStyle" 
+		column="PizzaStyle" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="bbqCook" 
+		column="BBQCook" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="ethnicBreadType" 
+		column="EthnicBreadType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="pepperType" 
+		column="PepperType" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="riceTypeUse" 
+		column="RiceTypeUse" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="mexIngredUse" 
+		column="MexIngredUse" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="flavorChangeAnyYear" 
+		column="FlavorChangeAnyYear" 
+		type="string" 
+		length="255" 
+		not-null="false" 
+		unique="false" />			
+
+    <property name="newItemBrag" 
+		column="NewItemBrag" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+    <property name="proteinFlavorApp" 
+		column="ProteinFlavorApp" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+    <property name="oilTypeUse" 
+		column="OilTypeUse" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />				
+		
+    <property name="eggItemUse" 
+		column="EggItemUse" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+    <property name="cheeseForm" 
+		column="[Cheese Form]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<!-- 2006-08-14 reid duplicate? - yes but the other is labeled Cheese Application -->
+    <property name="cheeseSauceFillingType" 
+		column="[Cheese/CheeseSauceFillingType]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" 
+		insert="false"
+		update="false" />	
+		
+	<!-- 2006-09-06 -->
+    <property name="soupWith" 
+		column="SoupWith" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />				
+		
+    <property name="soupBaseBroth" 
+		column="SoupBaseBroth" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />	
+		
+	<!-- 7-25-07 JDL -->
+	<property name="bevMenuItem" 
+		column="BevMenuItem" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="sideAccompDisFlavor" 
+		column="[Side/AccompDishFlavor]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="cookieTypeSource" 
+		column="[CookieType/Source]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="creamyTop" 
+		column="CreamyTop" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="creamyFill" 
+		column="CreamyFill" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="textureAttrib" 
+		column="[TextureAttrib]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<property name="qualityStyle" 
+		column="[QualityStyle]" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />
+		
+	<!-- END JDL -->
+
+	<!-- 2006-11-07 -->
+    <property name="veggieAll" 
+		column="VeggieAll" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />				
+		
+    <property name="allVegCarbFruit" 
+		column="AllVegCarbFruit" 
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />					
+
+</class>
+  
+ 
+  
+
+
+</hibernate-mapping>

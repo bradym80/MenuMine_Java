@@ -1,0 +1,140 @@
+Add price for a year
+
+References to item prices for each year appear throughout the code... This includes Java as well as Javascript and XML.
+Many of the occurances are simple getters/setters.
+
+Quite a few add entries to a table. Often the columns number for each entry have to be updated.
+
+Then there are a couple of places where a specific year is used, to display the current price (2007) or compare trends
+over time (2002 v 2007).
+
+It would be "nice" of some of this was paramaterized. A properties file that contains the "current" year for instance.
+
+Here is a list of files that were changed. Those that have !! in front of the file name refer to a specific date (like
+2002, or 2007).
+
+menumine/src/java/com/fsrin/menumine/context/webwork
+	
+	??GetDashboardBragItemsAction.java
+
+menumine/src/java/com/fsrin/menumine/core/incidence/trend
+
+	incidenceTableTrendBuilder.java
+	incidenceTrendItem.java
+	incidenceTrendTotals.java
+	
+menumine/src/java/com/fsrin/menumine/core/incidence/trend/xwork
+
+	DisplayCategoryIncidenceTrendAsExcelAction.java
+
+menumine/src/java/com/fsrin/menumine/core/menubook
+
+	!!MenuBookBulder.java
+	MenuBookMenuPart.java
+	
+menumine/src/java/com/fsrin/menumine/core/menubook/xwork
+
+	MenuBookChartBuilder.java
+	MenuBookTrendExcelAction.java
+	
+menumine/src/java/com/fsrin/menumine/core/menumine
+
+	!!FieldEnum.java
+	FieldsToDisplayBean.java
+	MasterFoodFilterParameters.java
+	MasterFoodFilterParametersImpl.java
+	fieldsToDisplayBean.hbm.xmlmenumine/web/WEB_INF/jsp/
+	tblmasterfood.hbm.xml
+	
+menumine/src/java/com/fsrin/menumine/core/menumine/marketsize/xwork
+
+	!!AbstractMarketSizeAction.java
+	
+menumine/src/java/com/fsrin/menumine/core/menumine/masterfood
+
+	MasterFood.java
+	
+menumine/src/java/com/fsrin/menumine/core/menumine/masterfood/hql
+
+	MasterFoodQueryBuilder.java
+	
+menumine/src/java/com/fsrin/menumine/core/menumine/sharetable
+	
+	StatisticalTableKeyFinderFactory.java
+	StatisticalTablePriceDataAggregationImpl.java
+	StatisticalTablePriceDataBuilder.java
+	StatisticalTablePriceDataIF.java
+	StatisticalTablePriceDataStandarddImpl.java
+	
+menumine/src/java/com/fsrin/menumine/core/menumine/webwork
+
+	!!AbstractChainTableTrendAction.java
+	!!AbstractCuttingEdgeTableTrandAction.java
+	ChartBuilder.java
+	MasterFoodFilterParametersWrapper.java
+	MasterFoodFilterParametersWrapperImpl.java
+	MenuMineDisplayMedianPriceTrandAction.java
+	ViewMeanTrendExcelAction.java
+	ViewMedianTrendExcelAction.java
+	
+menumine/src/java/com/fsrin/menumine/core/minefields
+	
+	MineFields.java
+	
+menumine/src/java/com/fsrin/menumine/dashboard/webwork
+
+	ViewDevelopmentDashboardAction.java
+	
+	
+menumine/web/ui/resources
+
+	MenuMineFAQ.htm
+	
+menumine/web/WEB-INF/jsp/menubook
+
+	!!menuBook.jsp
+	menuBookTrend.jsp
+	menuBookTrendRollUp.jsp
+	
+menumine/web/WEB-INF/jsp/menumine/categoryincidence
+
+	_menuMineCaregoryIncidenceOptions.jsp
+	_menuMineCategoryIncidenceTable.jsp
+	_menuMineCategoryIncidenceTrend.jsp
+	
+menumine/web/WEB_INF/jsp/menumine/form
+
+	_menuMineMainFormAndOrNotRow.jsp
+	_menuMineMainFormPricingEmpty.jsp
+	_manumMineMainFormSameSToreDiv.jsp
+	
+menumine/web/WEB_INF/jsp//menumine/itemsperchainmenuing
+
+	_menuMineItemsPerChainMenuingOptions.jsp
+	
+menumine/web/WEB_INF/jsp/menumine/meanpricetrend
+
+	_menuMineMeanPriceTrend.jsp
+	
+menumine/web/WEB_INF/jsp//menumine/medianpricetrend
+
+	_menuMineAveragePriceTrend.jsp
+	
+menumine/web/WEB_INF/jsp//menumine/menushare
+
+    _trendTableSidebySude.jsp
+	_3paneReportTypes.jsp
+	
+menumine/build/com/fsrin/menumine/core/menumine
+
+	fieldstodisplaybean.hbm.xml
+	tblmsterfood.hbm.xml
+   
+menumine/src/sql
+
+	make_menumine.sql
+	
+
+Fix problem with invalid totals (0.0)
+menumine/com/fsrin/menumine/core/incidence
+	IncidenceTableBuider.java 

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+
+
+
+  <class name="com.fsrin.menumine.core.menumine.savedquery.SavedQuery" table="savedquery" proxy="com.fsrin.menumine.core.menumine.savedquery.SavedQuery">
+    <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+    
+	  <many-to-one name="masterFoodFilterParameters" 
+	  	class="com.fsrin.menumine.core.menumine.MasterFoodFilterParametersImpl"  
+	  	column="mfParamsId"  cascade="all" lazy="false" /> 
+	  	
+	  <many-to-one name="fieldsToDisplayBean" 
+	  	class="com.fsrin.menumine.core.menumine.FieldsToDisplayBean"  
+	  	column="fieldsId"  cascade="all" lazy="false" /> 
+ 
+     <property name="name" 
+		column="sqName" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+	  
+    <property name="userName" 
+		column="sqUserName" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="groupName" 
+		column="sqGroupName" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+		
+	<property name="mineType" 
+		column="mineType" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+
+	<property name="permission" 
+		column="sqPermission" 
+		type="int" 
+		not-null="false" 
+		unique="false" />
+   
+	<property name="timestamp" 
+		column="timestamp" 
+		type="java.util.Date" 
+		not-null="false" 
+		unique="false" />
+
+     <property name="templateGroup" 
+		column="sqTemplateGroup" 
+		type="string" 
+		length="100" 
+		not-null="false" 
+		unique="false" />	
+    
+    
+    
+  </class>
+  
+</hibernate-mapping>

@@ -1,0 +1,348 @@
+#header {
+	z-index: 1;
+}
+
+#header table {
+	height: 53px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	border-bottom: 1px solid #cccccc;
+	padding: 0px;
+	
+}
+
+#header td {
+	vertical-align: bottom;
+	text-align:center;
+	padding: 0px;
+}
+/* 06-20-08 mjb added repeat-x used to be no-repeat */
+#header td.fade {
+	/*background-image: url(../img/fade-page-header.jpg);*/
+	background-image: url(../img/gradient-bg.gif);
+	background-position:right;
+	background-repeat:repeat-x;
+}
+
+#headerMenu table {
+	height: 53px;
+	border-spacing: 0px;
+	border-bottom: 0px solid #cccccc;
+	border-collapse: collapse;
+	padding: 0px;
+}
+
+#mainForm {
+	width: 225px;
+	height: 100%;
+	padding: 2px;
+	border: 1px solid #cccccc;
+}
+
+#mainForm h1 {
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#mainForm h2 {
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+	margin: 2px;
+	padding: 10px 0px 0px 0px;
+}
+
+#mainForm form {
+	margin: 0px;
+	padding: 0px;
+}
+
+#mainForm h3 {
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#mainForm p, #mainForm p input,  {
+	font-size: 10px;
+}
+
+#mainFormMenu table {
+	width: 100%;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	border: 0px none #cccccc;
+	border-collapse: collapse;
+}
+
+#mainFormMenu td {
+	width: 33%;
+}
+
+#mainFormSummary, #mainFormSummary p {
+	font-size: 9px;
+	margin: 0px 0px 2px 0px;
+	padding: 0px 0px 2px 0px;
+}
+
+#mainFormSummary h3 {
+	font-size: 10px;
+	font-weight: bold;
+	margin: 2px 0px 0px 0px;
+	padding: 2px 0px 0px 0px;
+	text-transform: uppercase;
+}
+
+#mainFormSummary {
+	width: 200px;
+}
+
+#mainFormQueryManager  {
+	width: 400px;
+}
+
+#mainFormQueryManager h3 {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+}	
+
+#mainFormQueryManager th, #mainFormQueryManager td, #mainFormQueryManager p {
+	font-size: 10px;
+}
+
+#mainStage table {
+}
+
+#mainStage td {
+	vertical-align: top;
+	text-align: left;
+}
+
+#generalOptions {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	background-color: #ccff99;
+}
+
+#generalOptions h3 {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0px 0px 0px 2px;
+	margin: 0px;
+}
+
+#generalOptions form {
+	padding: 0px;
+	margin: 0px;
+}
+
+#generalOptions table {
+	display: inline-block;
+	width: 100%;
+}
+
+#generalOptions td {
+	font-size: 10px;
+	white-space: nowrap;
+	text-align: left;
+}
+
+#generalOptions input, #generalOptions select {
+	font-size:9px;
+}
+
+#footer p { 
+	color:#CCCCCC; 
+	font-size: 9px; 
+	text-align:center;
+}
+
+.popupClose {
+	font-size: 8px;
+	padding: 0px;
+	margin: 0px;
+	text-align: right;
+}
+
+.powerSearchFieldName {
+	background-image: url(../img/fade-section-header-positio.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #3399FF;
+	
+	
+
+}
+
+.powerSearchFieldSummary {
+	background-image: url(../img/fade-section-header-positio2.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #3399FF;
+	
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #3399FF;
+
+/*font-size: .70em;
+	color: #666666;*/
+}
+
+.powerSearchFieldPopup {
+	display: none;
+	background-color: #99ccff;
+	position: absolute;
+	top: 100px;
+	left: 193px;
+	padding: 2px;
+	border: 2px solid #999999;
+	z-index:0;
+}
+
+.powerSearchFieldPopup h3, .powerSearchFilterPopup h3 {
+	margin: 0px;
+	padding: 0px;
+}
+
+.powerSearchFilterPopup {
+	display: none;
+	background-color: #ffff99;
+	position: absolute;
+	top: 100px;
+	left: 193px;
+	padding: 2px;
+	width: 300px;
+	border: 2px solid #999999;
+}
+
+.powerSearchFilterName {
+	font-size: 12px;
+	padding: 1px;
+	background-image: url(../img/fade-section-header-filter.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #FFFF00;
+	
+	
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFF00;
+}
+
+.powerSearchReportPopup {
+	display: none;
+	background-color: #ccff99;
+	position: absolute;
+	top: 100px;
+	left: 193px;
+	padding: 2px;
+	width: 300px;
+	border: 2px solid #999999;
+}
+
+.powerSearchReportName {
+	font-size: 12px;
+	padding: 1px;
+	background-color: #ccff99;
+	background-image: url(../img/fade-section-header-report.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #99ff66;
+	
+	
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #99ff66;
+}
+
+.powerSearchReportName {
+	font-size: 12px;
+	padding: 1px;
+	background-color: #ccff99;
+	background-image: url(../img/fade-section-header-report.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #99ff66;
+	
+	
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #99ff66;
+}
+
+.panelsAz {
+	font-size: 12px;
+	padding: 1px;
+	background-color: #eff6ff;
+	/*background-image: url(../img/fade-section-header-report.gif);
+	background-position:right;
+	background-repeat:no-repeat;*/
+	
+	font-weight: bold;
+	
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #ccccff;
+	
+	
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #ccccff;
+}
+
+#helpWithSearch {
+	font-size: 10px;
+	padding: 1px;
+	display: none;
+	background-color: #ffff99;
+	position: absolute;
+	top: 100px;
+	left: 193px;
+	width: 400px;
+	padding: 2px;
+	border: 2px solid #999999;
+}
+#powerSearchAdditionalFields td {
+	font-size:10px;
+}
+
+.jslink, .cleanLink {
+	cursor: pointer;
+	text-decoration: none;
+	color: #000;
+
+#recentChanges, #recentChanges2 {
+	font-size: .8em;
+	color: #666666;
+	width: 600px;
+
+}
